@@ -12,7 +12,7 @@
         "appointer/swaggervel": "dev-master",
         "doctrine/dbal": "~2.3",
         "fideloper/proxy": "^4.0",
-        "infyomlabs/coreui-templates": "6.0.x-dev",
+        "infyomlabs/adminlte-templates": "6.0.x-dev",
         "infyomlabs/laravel-generator": "6.0.x-dev",
         "infyomlabs/swagger-generator": "dev-master",
         "ixudra/curl": "^6.18",

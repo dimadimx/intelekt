@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Client
  * @package App\Models
- * @version February 18, 2020, 8:54 am UTC
+ * @version February 21, 2020, 3:31 pm UTC
  *
  * @property \App\Models\User user
  * @property \Illuminate\Database\Eloquent\Collection clientStatistics

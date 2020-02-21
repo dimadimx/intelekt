@@ -24,3 +24,16 @@ Route::resource('users', 'UserController')->middleware('auth');
 Route::resource('clients', 'ClientController')->middleware('auth');
 
 Route::resource('clientStatistics', 'ClientStatisticController')->middleware('auth');
+
+
+Auth::routes(['verify' => true]);
+
+Route::get('/home', 'HomeController@index')->middleware('verified');
+
+Auth::routes(['verify' => true]);
+
+Route::get('/home', 'HomeController@index')->middleware('verified');
+
+Route::resource('clientStatistics', 'ClientStatisticController');
+
+Route::resource('users', 'UserController')->middleware('auth');

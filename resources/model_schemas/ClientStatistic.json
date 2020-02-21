@@ -25,9 +25,9 @@
     },
     {
         "name": "date",
-        "dbType": "datetime",
+        "dbType": "datetime:nullable",
         "htmlType": "date",
-        "validations": "required",
+        "validations": null,
         "searchable": true,
         "fillable": true,
         "primary": false,

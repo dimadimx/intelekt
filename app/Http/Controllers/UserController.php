@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Jobs\Abills;
 use App\Repositories\UserRepository;
-use Flash;
-use Hash;
+use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
-use Ixudra\Curl\Facades\Curl;
+use Flash;
 use Response;
+use Hash;
 
 class UserController extends AppBaseController
 {

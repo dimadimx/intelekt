@@ -1,28 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-     <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="{{ route('clientStatistics.index') }}">Client Statistic</a>
-            </li>
-            <li class="breadcrumb-item active">Detail</li>
-     </ol>
-     <div class="container-fluid">
-          <div class="animated fadeIn">
-                 @include('coreui-templates::common.errors')
-                 <div class="row">
-                     <div class="col-lg-12">
-                         <div class="card">
-                             <div class="card-header">
-                                 <strong>Details</strong>
-                                  <a href="{{ route('clientStatistics.index') }}" class="btn btn-light">Back</a>
-                             </div>
-                             <div class="card-body">
-                                 @include('client_statistics.show_fields')
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-          </div>
+    <section class="content-header">
+        <h1>
+            Client Statistic
+        </h1>
+    </section>
+    <div class="content">
+        <div class="box box-primary">
+            <div class="box-body">
+                <div class="row" style="padding-left: 20px">
+                    @include('client_statistics.show_fields')
+                    <a href="{{ route('clientStatistics.index') }}" class="btn btn-default">Back</a>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

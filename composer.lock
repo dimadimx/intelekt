@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "65bb8d93910186e450e62618a0eb30a5",
+    "content-hash": "acc8c0875ec1a56b3a066cf2a683e652",
     "packages": [
         {
             "name": "amphp/amp",
@@ -2222,17 +2222,17 @@
             "time": "2019-12-20T13:11:11+00:00"
         },
         {
-            "name": "infyomlabs/coreui-templates",
+            "name": "infyomlabs/adminlte-templates",
             "version": "6.0.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/InfyOmLabs/coreui-templates.git",
-                "reference": "4600aecc64f31d80aebb3a5f100d827550bd7575"
+                "url": "https://github.com/InfyOmLabs/adminlte-templates.git",
+                "reference": "b376554915c0fad15d7bd9d47d0d4dc8d7298fc4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/InfyOmLabs/coreui-templates/zipball/4600aecc64f31d80aebb3a5f100d827550bd7575",
-                "reference": "4600aecc64f31d80aebb3a5f100d827550bd7575",
+                "url": "https://api.github.com/repos/InfyOmLabs/adminlte-templates/zipball/b376554915c0fad15d7bd9d47d0d4dc8d7298fc4",
+                "reference": "b376554915c0fad15d7bd9d47d0d4dc8d7298fc4",
                 "shasum": ""
             },
             "require": {
@@ -2240,9 +2240,16 @@
                 "php": ">=7.2"
             },
             "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "\\InfyOm\\AdminLTETemplates\\AdminLTETemplatesServiceProvider"
+                    ]
+                }
+            },
             "autoload": {
                 "psr-4": {
-                    "InfyOm\\CoreUITemplates\\": "src/"
+                    "InfyOm\\AdminLTETemplates\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2255,16 +2262,16 @@
                     "email": "me@mitul.me"
                 }
             ],
-            "description": "CoreUI templates for InfyOm Laravel Generator",
+            "description": "AdminLTE templates for InfyOm Laravel Generator",
             "keywords": [
+                "AdminLTE",
                 "bootstrap",
-                "coreui",
                 "generator",
                 "infyom",
                 "laravel",
                 "templates"
             ],
-            "time": "2020-02-08T11:53:32+00:00"
+            "time": "2020-02-08T13:34:46+00:00"
         },
         {
             "name": "infyomlabs/laravel-generator",
@@ -4277,16 +4284,16 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "3.9.2",
+            "version": "3.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "7779489a47d443f845271badbdcedfe4df8e06fb"
+                "reference": "7e1633a6964b48589b142d60542f9ed31bd37a92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/7779489a47d443f845271badbdcedfe4df8e06fb",
-                "reference": "7779489a47d443f845271badbdcedfe4df8e06fb",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/7e1633a6964b48589b142d60542f9ed31bd37a92",
+                "reference": "7e1633a6964b48589b142d60542f9ed31bd37a92",
                 "shasum": ""
             },
             "require": {
@@ -4360,7 +4367,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2019-12-17T08:18:51+00:00"
+            "time": "2020-02-21T04:36:14+00:00"
         },
         {
             "name": "swagger-api/swagger-ui",
@@ -6021,16 +6028,16 @@
         },
         {
             "name": "yajra/laravel-datatables-html",
-            "version": "v4.21.0",
+            "version": "v4.21.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yajra/laravel-datatables-html.git",
-                "reference": "6ac575c1aa736a33e351cef6e8c6156ef611e9c4"
+                "reference": "f0abe2fa11b0193dba6d1c845d4a4144e6d98d15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yajra/laravel-datatables-html/zipball/6ac575c1aa736a33e351cef6e8c6156ef611e9c4",
-                "reference": "6ac575c1aa736a33e351cef6e8c6156ef611e9c4",
+                "url": "https://api.github.com/repos/yajra/laravel-datatables-html/zipball/f0abe2fa11b0193dba6d1c845d4a4144e6d98d15",
+                "reference": "f0abe2fa11b0193dba6d1c845d4a4144e6d98d15",
                 "shasum": ""
             },
             "require": {
@@ -6077,7 +6084,7 @@
                 "jquery",
                 "laravel"
             ],
-            "time": "2020-02-18T02:34:45+00:00"
+            "time": "2020-02-21T06:53:40+00:00"
         },
         {
             "name": "yajra/laravel-datatables-oracle",
@@ -8596,7 +8603,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "appointer/swaggervel": 20,
-        "infyomlabs/coreui-templates": 20,
+        "infyomlabs/adminlte-templates": 20,
         "infyomlabs/laravel-generator": 20,
         "infyomlabs/swagger-generator": 20
     },

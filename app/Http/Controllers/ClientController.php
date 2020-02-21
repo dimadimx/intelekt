@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateClientRequest;
 use App\Http\Requests\UpdateClientRequest;
-use App\Jobs\Abills;
 use App\Repositories\ClientRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
-use Illuminate\Support\Facades\Auth;
 use Response;
 
 class ClientController extends AppBaseController
@@ -76,28 +74,6 @@ class ClientController extends AppBaseController
     {
         $client = $this->clientRepository->find($id);
 
-
-//        $this->dispatch(new Abills(Auth::user(), '2020-01-01', '2020-01-31'));
-//        Abills::dispatch(Auth::user(), '2020-01-01', '2020-01-31')->onQueue('processing');
-        $MadelineProto = new \danog\MadelineProto\API('session.madeline');
-
-        $settings = array(
-            'peer' => "@IntelektWorkBot", //название_канала, должно начинаться с @, например @breakingmash
-            'offset_id' => 10,
-            'offset_date' => 0,
-            'add_offset' => 0,
-            'limit' => 20, //Количество постов, которые вернет клиент
-            'max_id' => 0, //Максимальный id поста
-            'min_id' => 0, //Минимальный id поста - использую для пагинации, при  0 возвращаются последние посты.
-            //'hash' => []
-        );
-
-
-        $data = $MadelineProto->messages->getHistory($settings);
-
-        echo '<pre>';
-        print_r($data);
-        echo '</pre>';
         if (empty($client)) {
             Flash::error('Client not found');
 
