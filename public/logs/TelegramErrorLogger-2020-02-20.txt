@@ -1,0 +1,366 @@
+============[Date]============
+[ 2020-02-20 15:37:31  UTC ] 
+==========[Response]==========
+ok:			False
+error_code:		400
+description:		Bad Request: chat not found
+=========[Sent Data]==========
+[ref]
+ref.text= Test
+
+
+============[Trace]===========
+#0 /disk/work/www/coreui-generator/vendor/eleirbag89/telegrambotphp/Telegram.php(3191): TelegramErrorLogger::log(Array, Array)
+#1 /disk/work/www/coreui-generator/vendor/eleirbag89/telegrambotphp/Telegram.php(107): Telegram->sendAPIRequest('https://api.tel...', Array)
+#2 /disk/work/www/coreui-generator/vendor/eleirbag89/telegrambotphp/Telegram.php(192): Telegram->endpoint('sendMessage', Array)
+#3 /disk/work/www/coreui-generator/app/Http/Controllers/ClientController.php(87): Telegram->sendMessage(Array)
+#4 [internal function]: App\Http\Controllers\ClientController->show('1')
+#5 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): call_user_func_array(Array, Array)
+#6 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\Routing\Controller->callAction('show', Array)
+#7 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Route.php(219): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(App\Http\Controllers\ClientController), 'show')
+#8 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Route.php(176): Illuminate\Routing\Route->runController()
+#9 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(680): Illuminate\Routing\Route->run()
+#10 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(130): Illuminate\Routing\Router->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#11 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(41): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#12 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Routing\Middleware\SubstituteBindings->handle(Object(Illuminate\Http\Request), Object(Closure))
+#13 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(43): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#14 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Auth\Middleware\Authenticate->handle(Object(Illuminate\Http\Request), Object(Closure))
+#15 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(75): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#16 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\VerifyCsrfToken->handle(Object(Illuminate\Http\Request), Object(Closure))
+#17 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#18 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\View\Middleware\ShareErrorsFromSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#19 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(56): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#20 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Session\Middleware\StartSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#21 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#22 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse->handle(Object(Illuminate\Http\Request), Object(Closure))
+#23 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(66): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#24 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Cookie\Middleware\EncryptCookies->handle(Object(Illuminate\Http\Request), Object(Closure))
+#25 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(105): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#26 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(682): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#27 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(657): Illuminate\Routing\Router->runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#28 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(623): Illuminate\Routing\Router->runRoute(Object(Illuminate\Http\Request), Object(Illuminate\Routing\Route))
+#29 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(612): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#30 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(176): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#31 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(130): Illuminate\Foundation\Http\Kernel->Illuminate\Foundation\Http\{closure}(Object(Illuminate\Http\Request))
+#32 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#33 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#34 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#35 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#36 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#37 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\ValidatePostSize->handle(Object(Illuminate\Http\Request), Object(Closure))
+#38 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(62): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#39 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode->handle(Object(Illuminate\Http\Request), Object(Closure))
+#40 /disk/work/www/coreui-generator/vendor/fideloper/proxy/src/TrustProxies.php(57): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#41 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Fideloper\Proxy\TrustProxies->handle(Object(Illuminate\Http\Request), Object(Closure))
+#42 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(105): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#43 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#44 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#45 /disk/work/www/coreui-generator/public/index.php(55): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#46 /disk/work/www/coreui-generator/server.php(21): require_once('/disk/work/www/...')
+#47 {main}
+
+============[Date]============
+[ 2020-02-20 15:40:12  UTC ] 
+==========[Response]==========
+ok:			False
+error_code:		400
+description:		Bad Request: chat not found
+=========[Sent Data]==========
+[ref]
+ref.text= Test
+
+
+============[Trace]===========
+#0 /disk/work/www/coreui-generator/vendor/eleirbag89/telegrambotphp/Telegram.php(3191): TelegramErrorLogger::log(Array, Array)
+#1 /disk/work/www/coreui-generator/vendor/eleirbag89/telegrambotphp/Telegram.php(107): Telegram->sendAPIRequest('https://api.tel...', Array)
+#2 /disk/work/www/coreui-generator/vendor/eleirbag89/telegrambotphp/Telegram.php(192): Telegram->endpoint('sendMessage', Array)
+#3 /disk/work/www/coreui-generator/app/Http/Controllers/ClientController.php(87): Telegram->sendMessage(Array)
+#4 [internal function]: App\Http\Controllers\ClientController->show('1')
+#5 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): call_user_func_array(Array, Array)
+#6 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\Routing\Controller->callAction('show', Array)
+#7 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Route.php(219): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(App\Http\Controllers\ClientController), 'show')
+#8 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Route.php(176): Illuminate\Routing\Route->runController()
+#9 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(680): Illuminate\Routing\Route->run()
+#10 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(130): Illuminate\Routing\Router->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#11 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(41): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#12 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Routing\Middleware\SubstituteBindings->handle(Object(Illuminate\Http\Request), Object(Closure))
+#13 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(43): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#14 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Auth\Middleware\Authenticate->handle(Object(Illuminate\Http\Request), Object(Closure))
+#15 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(75): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#16 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\VerifyCsrfToken->handle(Object(Illuminate\Http\Request), Object(Closure))
+#17 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#18 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\View\Middleware\ShareErrorsFromSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#19 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(56): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#20 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Session\Middleware\StartSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#21 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#22 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse->handle(Object(Illuminate\Http\Request), Object(Closure))
+#23 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(66): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#24 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Cookie\Middleware\EncryptCookies->handle(Object(Illuminate\Http\Request), Object(Closure))
+#25 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(105): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#26 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(682): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#27 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(657): Illuminate\Routing\Router->runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#28 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(623): Illuminate\Routing\Router->runRoute(Object(Illuminate\Http\Request), Object(Illuminate\Routing\Route))
+#29 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(612): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#30 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(176): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#31 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(130): Illuminate\Foundation\Http\Kernel->Illuminate\Foundation\Http\{closure}(Object(Illuminate\Http\Request))
+#32 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#33 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#34 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#35 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#36 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#37 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\ValidatePostSize->handle(Object(Illuminate\Http\Request), Object(Closure))
+#38 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(62): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#39 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode->handle(Object(Illuminate\Http\Request), Object(Closure))
+#40 /disk/work/www/coreui-generator/vendor/fideloper/proxy/src/TrustProxies.php(57): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#41 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Fideloper\Proxy\TrustProxies->handle(Object(Illuminate\Http\Request), Object(Closure))
+#42 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(105): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#43 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#44 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#45 /disk/work/www/coreui-generator/public/index.php(55): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#46 /disk/work/www/coreui-generator/server.php(21): require_once('/disk/work/www/...')
+#47 {main}
+
+============[Date]============
+[ 2020-02-20 15:40:18  UTC ] 
+==========[Response]==========
+ok:			False
+error_code:		400
+description:		Bad Request: chat not found
+=========[Sent Data]==========
+[ref]
+ref.text= Test
+
+
+============[Trace]===========
+#0 /disk/work/www/coreui-generator/vendor/eleirbag89/telegrambotphp/Telegram.php(3191): TelegramErrorLogger::log(Array, Array)
+#1 /disk/work/www/coreui-generator/vendor/eleirbag89/telegrambotphp/Telegram.php(107): Telegram->sendAPIRequest('https://api.tel...', Array)
+#2 /disk/work/www/coreui-generator/vendor/eleirbag89/telegrambotphp/Telegram.php(192): Telegram->endpoint('sendMessage', Array)
+#3 /disk/work/www/coreui-generator/app/Http/Controllers/ClientController.php(87): Telegram->sendMessage(Array)
+#4 [internal function]: App\Http\Controllers\ClientController->show('1')
+#5 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): call_user_func_array(Array, Array)
+#6 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\Routing\Controller->callAction('show', Array)
+#7 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Route.php(219): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(App\Http\Controllers\ClientController), 'show')
+#8 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Route.php(176): Illuminate\Routing\Route->runController()
+#9 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(680): Illuminate\Routing\Route->run()
+#10 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(130): Illuminate\Routing\Router->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#11 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(41): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#12 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Routing\Middleware\SubstituteBindings->handle(Object(Illuminate\Http\Request), Object(Closure))
+#13 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(43): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#14 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Auth\Middleware\Authenticate->handle(Object(Illuminate\Http\Request), Object(Closure))
+#15 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(75): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#16 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\VerifyCsrfToken->handle(Object(Illuminate\Http\Request), Object(Closure))
+#17 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#18 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\View\Middleware\ShareErrorsFromSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#19 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(56): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#20 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Session\Middleware\StartSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#21 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#22 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse->handle(Object(Illuminate\Http\Request), Object(Closure))
+#23 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(66): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#24 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Cookie\Middleware\EncryptCookies->handle(Object(Illuminate\Http\Request), Object(Closure))
+#25 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(105): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#26 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(682): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#27 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(657): Illuminate\Routing\Router->runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#28 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(623): Illuminate\Routing\Router->runRoute(Object(Illuminate\Http\Request), Object(Illuminate\Routing\Route))
+#29 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(612): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#30 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(176): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#31 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(130): Illuminate\Foundation\Http\Kernel->Illuminate\Foundation\Http\{closure}(Object(Illuminate\Http\Request))
+#32 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#33 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#34 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#35 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#36 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#37 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\ValidatePostSize->handle(Object(Illuminate\Http\Request), Object(Closure))
+#38 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(62): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#39 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode->handle(Object(Illuminate\Http\Request), Object(Closure))
+#40 /disk/work/www/coreui-generator/vendor/fideloper/proxy/src/TrustProxies.php(57): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#41 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Fideloper\Proxy\TrustProxies->handle(Object(Illuminate\Http\Request), Object(Closure))
+#42 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(105): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#43 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#44 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#45 /disk/work/www/coreui-generator/public/index.php(55): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#46 /disk/work/www/coreui-generator/server.php(21): require_once('/disk/work/www/...')
+#47 {main}
+
+============[Date]============
+[ 2020-02-20 15:40:25  UTC ] 
+==========[Response]==========
+ok:			False
+error_code:		400
+description:		Bad Request: chat_id is empty
+=========[Sent Data]==========
+[ref]
+ref.text= Test
+
+
+============[Trace]===========
+#0 /disk/work/www/coreui-generator/vendor/eleirbag89/telegrambotphp/Telegram.php(3191): TelegramErrorLogger::log(Array, Array)
+#1 /disk/work/www/coreui-generator/vendor/eleirbag89/telegrambotphp/Telegram.php(107): Telegram->sendAPIRequest('https://api.tel...', Array)
+#2 /disk/work/www/coreui-generator/vendor/eleirbag89/telegrambotphp/Telegram.php(192): Telegram->endpoint('sendMessage', Array)
+#3 /disk/work/www/coreui-generator/app/Http/Controllers/ClientController.php(87): Telegram->sendMessage(Array)
+#4 [internal function]: App\Http\Controllers\ClientController->show('1')
+#5 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): call_user_func_array(Array, Array)
+#6 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\Routing\Controller->callAction('show', Array)
+#7 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Route.php(219): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(App\Http\Controllers\ClientController), 'show')
+#8 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Route.php(176): Illuminate\Routing\Route->runController()
+#9 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(680): Illuminate\Routing\Route->run()
+#10 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(130): Illuminate\Routing\Router->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#11 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(41): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#12 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Routing\Middleware\SubstituteBindings->handle(Object(Illuminate\Http\Request), Object(Closure))
+#13 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(43): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#14 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Auth\Middleware\Authenticate->handle(Object(Illuminate\Http\Request), Object(Closure))
+#15 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(75): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#16 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\VerifyCsrfToken->handle(Object(Illuminate\Http\Request), Object(Closure))
+#17 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#18 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\View\Middleware\ShareErrorsFromSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#19 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(56): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#20 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Session\Middleware\StartSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#21 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#22 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse->handle(Object(Illuminate\Http\Request), Object(Closure))
+#23 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(66): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#24 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Cookie\Middleware\EncryptCookies->handle(Object(Illuminate\Http\Request), Object(Closure))
+#25 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(105): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#26 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(682): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#27 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(657): Illuminate\Routing\Router->runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#28 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(623): Illuminate\Routing\Router->runRoute(Object(Illuminate\Http\Request), Object(Illuminate\Routing\Route))
+#29 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(612): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#30 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(176): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#31 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(130): Illuminate\Foundation\Http\Kernel->Illuminate\Foundation\Http\{closure}(Object(Illuminate\Http\Request))
+#32 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#33 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#34 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#35 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#36 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#37 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\ValidatePostSize->handle(Object(Illuminate\Http\Request), Object(Closure))
+#38 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(62): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#39 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode->handle(Object(Illuminate\Http\Request), Object(Closure))
+#40 /disk/work/www/coreui-generator/vendor/fideloper/proxy/src/TrustProxies.php(57): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#41 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Fideloper\Proxy\TrustProxies->handle(Object(Illuminate\Http\Request), Object(Closure))
+#42 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(105): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#43 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#44 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#45 /disk/work/www/coreui-generator/public/index.php(55): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#46 /disk/work/www/coreui-generator/server.php(21): require_once('/disk/work/www/...')
+#47 {main}
+
+============[Date]============
+[ 2020-02-20 15:43:05  UTC ] 
+==========[Response]==========
+ok:			False
+error_code:		400
+description:		Bad Request: chat not found
+=========[Sent Data]==========
+[ref]
+ref.text= Test
+
+
+============[Trace]===========
+#0 /disk/work/www/coreui-generator/vendor/eleirbag89/telegrambotphp/Telegram.php(3191): TelegramErrorLogger::log(Array, Array)
+#1 /disk/work/www/coreui-generator/vendor/eleirbag89/telegrambotphp/Telegram.php(107): Telegram->sendAPIRequest('https://api.tel...', Array)
+#2 /disk/work/www/coreui-generator/vendor/eleirbag89/telegrambotphp/Telegram.php(192): Telegram->endpoint('sendMessage', Array)
+#3 /disk/work/www/coreui-generator/app/Http/Controllers/ClientController.php(87): Telegram->sendMessage(Array)
+#4 [internal function]: App\Http\Controllers\ClientController->show('1')
+#5 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): call_user_func_array(Array, Array)
+#6 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\Routing\Controller->callAction('show', Array)
+#7 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Route.php(219): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(App\Http\Controllers\ClientController), 'show')
+#8 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Route.php(176): Illuminate\Routing\Route->runController()
+#9 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(680): Illuminate\Routing\Route->run()
+#10 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(130): Illuminate\Routing\Router->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#11 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(41): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#12 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Routing\Middleware\SubstituteBindings->handle(Object(Illuminate\Http\Request), Object(Closure))
+#13 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(43): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#14 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Auth\Middleware\Authenticate->handle(Object(Illuminate\Http\Request), Object(Closure))
+#15 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(75): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#16 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\VerifyCsrfToken->handle(Object(Illuminate\Http\Request), Object(Closure))
+#17 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#18 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\View\Middleware\ShareErrorsFromSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#19 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(56): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#20 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Session\Middleware\StartSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#21 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#22 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse->handle(Object(Illuminate\Http\Request), Object(Closure))
+#23 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(66): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#24 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Cookie\Middleware\EncryptCookies->handle(Object(Illuminate\Http\Request), Object(Closure))
+#25 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(105): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#26 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(682): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#27 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(657): Illuminate\Routing\Router->runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#28 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(623): Illuminate\Routing\Router->runRoute(Object(Illuminate\Http\Request), Object(Illuminate\Routing\Route))
+#29 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(612): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#30 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(176): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#31 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(130): Illuminate\Foundation\Http\Kernel->Illuminate\Foundation\Http\{closure}(Object(Illuminate\Http\Request))
+#32 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#33 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#34 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#35 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#36 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#37 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\ValidatePostSize->handle(Object(Illuminate\Http\Request), Object(Closure))
+#38 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(62): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#39 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode->handle(Object(Illuminate\Http\Request), Object(Closure))
+#40 /disk/work/www/coreui-generator/vendor/fideloper/proxy/src/TrustProxies.php(57): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#41 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Fideloper\Proxy\TrustProxies->handle(Object(Illuminate\Http\Request), Object(Closure))
+#42 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(105): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#43 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#44 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#45 /disk/work/www/coreui-generator/public/index.php(55): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#46 /disk/work/www/coreui-generator/server.php(21): require_once('/disk/work/www/...')
+#47 {main}
+
+============[Date]============
+[ 2020-02-20 15:43:35  UTC ] 
+==========[Response]==========
+ok:			False
+error_code:		403
+description:		Forbidden: bot was blocked by the user
+=========[Sent Data]==========
+[ref]
+ref.text= Test
+
+
+============[Trace]===========
+#0 /disk/work/www/coreui-generator/vendor/eleirbag89/telegrambotphp/Telegram.php(3191): TelegramErrorLogger::log(Array, Array)
+#1 /disk/work/www/coreui-generator/vendor/eleirbag89/telegrambotphp/Telegram.php(107): Telegram->sendAPIRequest('https://api.tel...', Array)
+#2 /disk/work/www/coreui-generator/vendor/eleirbag89/telegrambotphp/Telegram.php(192): Telegram->endpoint('sendMessage', Array)
+#3 /disk/work/www/coreui-generator/app/Http/Controllers/ClientController.php(87): Telegram->sendMessage(Array)
+#4 [internal function]: App\Http\Controllers\ClientController->show('1')
+#5 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): call_user_func_array(Array, Array)
+#6 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\Routing\Controller->callAction('show', Array)
+#7 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Route.php(219): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(App\Http\Controllers\ClientController), 'show')
+#8 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Route.php(176): Illuminate\Routing\Route->runController()
+#9 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(680): Illuminate\Routing\Route->run()
+#10 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(130): Illuminate\Routing\Router->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#11 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(41): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#12 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Routing\Middleware\SubstituteBindings->handle(Object(Illuminate\Http\Request), Object(Closure))
+#13 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(43): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#14 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Auth\Middleware\Authenticate->handle(Object(Illuminate\Http\Request), Object(Closure))
+#15 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(75): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#16 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\VerifyCsrfToken->handle(Object(Illuminate\Http\Request), Object(Closure))
+#17 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#18 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\View\Middleware\ShareErrorsFromSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#19 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(56): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#20 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Session\Middleware\StartSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#21 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#22 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse->handle(Object(Illuminate\Http\Request), Object(Closure))
+#23 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(66): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#24 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Cookie\Middleware\EncryptCookies->handle(Object(Illuminate\Http\Request), Object(Closure))
+#25 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(105): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#26 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(682): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#27 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(657): Illuminate\Routing\Router->runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#28 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(623): Illuminate\Routing\Router->runRoute(Object(Illuminate\Http\Request), Object(Illuminate\Routing\Route))
+#29 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Routing/Router.php(612): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#30 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(176): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#31 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(130): Illuminate\Foundation\Http\Kernel->Illuminate\Foundation\Http\{closure}(Object(Illuminate\Http\Request))
+#32 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#33 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#34 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#35 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#36 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#37 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\ValidatePostSize->handle(Object(Illuminate\Http\Request), Object(Closure))
+#38 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(62): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#39 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode->handle(Object(Illuminate\Http\Request), Object(Closure))
+#40 /disk/work/www/coreui-generator/vendor/fideloper/proxy/src/TrustProxies.php(57): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#41 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(171): Fideloper\Proxy\TrustProxies->handle(Object(Illuminate\Http\Request), Object(Closure))
+#42 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(105): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#43 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#44 /disk/work/www/coreui-generator/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#45 /disk/work/www/coreui-generator/public/index.php(55): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#46 /disk/work/www/coreui-generator/server.php(21): require_once('/disk/work/www/...')
+#47 {main}
+

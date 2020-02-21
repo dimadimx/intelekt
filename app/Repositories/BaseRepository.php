@@ -155,6 +155,45 @@ abstract class BaseRepository
     }
 
     /**
+     * Find model record
+     *
+     * @param string $name
+     * @param mixed $value
+     * @param array $columns
+     *
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|Model|null
+     */
+    public function findByAttribute($name, $value, $columns = ['*'])
+    {
+        $query = $this->model->newQuery();
+        $query->where($name, $value);
+        return $query->get($columns);
+    }
+
+    /**
+     * Find model record
+     *
+     * @param array $attributes
+     * @param array $columns
+     *
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|Model|null
+     */
+    public function findAllByAttributes($attributes, $columns = ['*'])
+    {
+        $query = $this->model->newQuery();
+        foreach ($attributes as $key => $value) {
+            $data = explode(' ', $key);
+            if (!empty($data[1])) {
+                $query->where($data[0], $data[1], $value);
+            } else {
+                $query->where($key, $value);
+            }
+        }
+
+        return $query->get($columns);
+    }
+
+    /**
      * Update model record for given id
      *
      * @param array $input
@@ -173,6 +212,25 @@ abstract class BaseRepository
         $model->save();
 
         return $model;
+    }
+
+    /**
+     * Update all records
+     *
+     * @param array $input
+     * @param array $attributes
+     *
+     * @return int
+     */
+    public function updateAllByAttributes($input, $attributes)
+    {
+        $query = $this->model->newQuery();
+
+        foreach ($attributes as $key => $value) {
+            $query->where($key, $value);
+        }
+
+        return $query->update($input);
     }
 
     /**

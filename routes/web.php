@@ -15,7 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->middleware('verified');
+
+Route::resource('users', 'UserController')->middleware('auth');
+
+Route::resource('clients', 'ClientController')->middleware('auth');
+
+Route::resource('clientStatistics', 'ClientStatisticController')->middleware('auth');
