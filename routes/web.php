@@ -21,6 +21,8 @@ Route::get('/home', 'HomeController@index')->middleware('verified');
 
 Route::resource('users', 'UserController')->middleware('auth');
 
+Route::get('clients/sync', 'ClientController@sync')->name('clients.sync')->middleware('auth');
+
 Route::resource('clients', 'ClientController')->middleware('auth');
 
 Route::resource('clientStatistics', 'ClientStatisticController')->middleware('auth');

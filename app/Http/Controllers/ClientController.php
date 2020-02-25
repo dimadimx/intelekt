@@ -6,6 +6,7 @@ use App\DataTables\ClientDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateClientRequest;
 use App\Http\Requests\UpdateClientRequest;
+use App\Jobs\Abills;
 use App\Repositories\ClientRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
@@ -146,6 +147,18 @@ class ClientController extends AppBaseController
         $this->clientRepository->delete($id);
 
         Flash::success('Client deleted successfully.');
+
+        return redirect(route('clients.index'));
+    }
+
+    /**
+     * sync clients in storage.
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function sync()
+    {
+        Abills::dispatch(Auth::user());
 
         return redirect(route('clients.index'));
     }

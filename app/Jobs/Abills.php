@@ -76,8 +76,8 @@ class Abills implements ShouldQueue {
         if ($this->from and $this->to) {
             $this->updateClientsSessions($clientRepository, $clientStatisticRepository);
         } else {
-//            $this->updateGroupClients($clientRepository);
-//            $this->updateBelongsClients($clientRepository);
+            $this->updateGroupClients($clientRepository);
+            $this->updateBelongsClients($clientRepository);
         }
     }
 
