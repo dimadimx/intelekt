@@ -2,10 +2,27 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
+/**
+ * Class User
+ * @package App\Models
+ * @version February 25, 2020, 8:42 am UTC
+ *
+ * @property \Illuminate\Database\Eloquent\Collection clients
+ * @property string name
+ * @property string email
+ * @property string|\Carbon\Carbon email_verified_at
+ * @property string password
+ * @property string api_user
+ * @property string api_password
+ * @property integer api_gid
+ * @property integer api_uid
+ * @property number price
+ * @property string remember_token
+ */
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
@@ -16,7 +33,14 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'api_user', 'api_password'
+        'name',
+        'email',
+        'password',
+        'api_user',
+        'api_password',
+        'api_gid',
+        'api_uid',
+        'price',
     ];
 
     /**
@@ -36,4 +60,23 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Validation rules
+     *
+     * @var array
+     */
+    public static $rules = [
+        'name'                  => 'required',
+        'email'                 => 'required|email|unique:users,email',
+        'password'              => 'required|confirmed'
+    ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function clients()
+    {
+        return $this->hasMany(\App\Models\Client::class, 'user_id');
+    }
 }

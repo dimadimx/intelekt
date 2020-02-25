@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ClientDataTable;
+use App\Http\Requests;
 use App\Http\Requests\CreateClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Repositories\ClientRepository;
-use App\Http\Controllers\AppBaseController;
-use Illuminate\Http\Request;
 use Flash;
+use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\Auth;
 use Response;
 
 class ClientController extends AppBaseController
@@ -23,16 +25,12 @@ class ClientController extends AppBaseController
     /**
      * Display a listing of the Client.
      *
-     * @param Request $request
-     *
+     * @param ClientDataTable $clientDataTable
      * @return Response
      */
-    public function index(Request $request)
+    public function index(ClientDataTable $clientDataTable)
     {
-        $clients = $this->clientRepository->all();
-
-        return view('clients.index')
-            ->with('clients', $clients);
+        return $clientDataTable->render('clients.index');
     }
 
     /**
@@ -66,7 +64,7 @@ class ClientController extends AppBaseController
     /**
      * Display the specified Client.
      *
-     * @param int $id
+     * @param  int $id
      *
      * @return Response
      */
@@ -74,7 +72,7 @@ class ClientController extends AppBaseController
     {
         $client = $this->clientRepository->find($id);
 
-        if (empty($client)) {
+        if (empty($client) or $client->user_id != Auth::user()->id) {
             Flash::error('Client not found');
 
             return redirect(route('clients.index'));
@@ -86,7 +84,7 @@ class ClientController extends AppBaseController
     /**
      * Show the form for editing the specified Client.
      *
-     * @param int $id
+     * @param  int $id
      *
      * @return Response
      */
@@ -94,7 +92,7 @@ class ClientController extends AppBaseController
     {
         $client = $this->clientRepository->find($id);
 
-        if (empty($client)) {
+        if (empty($client) or $client->user_id != Auth::user()->id) {
             Flash::error('Client not found');
 
             return redirect(route('clients.index'));
@@ -106,7 +104,7 @@ class ClientController extends AppBaseController
     /**
      * Update the specified Client in storage.
      *
-     * @param int $id
+     * @param  int              $id
      * @param UpdateClientRequest $request
      *
      * @return Response
@@ -115,7 +113,7 @@ class ClientController extends AppBaseController
     {
         $client = $this->clientRepository->find($id);
 
-        if (empty($client)) {
+        if (empty($client) or $client->user_id != Auth::user()->id) {
             Flash::error('Client not found');
 
             return redirect(route('clients.index'));
@@ -131,9 +129,7 @@ class ClientController extends AppBaseController
     /**
      * Remove the specified Client from storage.
      *
-     * @param int $id
-     *
-     * @throws \Exception
+     * @param  int $id
      *
      * @return Response
      */
@@ -141,7 +137,7 @@ class ClientController extends AppBaseController
     {
         $client = $this->clientRepository->find($id);
 
-        if (empty($client)) {
+        if (empty($client) or $client->user_id != Auth::user()->id) {
             Flash::error('Client not found');
 
             return redirect(route('clients.index'));

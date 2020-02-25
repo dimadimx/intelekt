@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Client
  * @package App\Models
- * @version February 21, 2020, 3:31 pm UTC
+ * @version February 25, 2020, 8:32 am UTC
  *
- * @property \App\Models\User user
+ * @property \App\User user
  * @property \Illuminate\Database\Eloquent\Collection clientStatistics
  * @property integer user_id
  * @property integer api_uid
@@ -26,7 +26,7 @@ class Client extends Model
     use SoftDeletes;
 
     public $table = 'clients';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -80,7 +80,7 @@ class Client extends Model
      **/
     public function user()
     {
-        return $this->belongsTo(\App\Models\User::class, 'user_id');
+        return $this->belongsTo(\App\User::class, 'user_id');
     }
 
     /**

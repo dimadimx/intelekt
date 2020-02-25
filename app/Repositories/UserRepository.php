@@ -8,6 +8,7 @@ use App\Repositories\BaseRepository;
 /**
  * Class UserRepository
  * @package App\Repositories
+ * @version February 25, 2020, 8:42 am UTC
 */
 
 class UserRepository extends BaseRepository
@@ -18,7 +19,12 @@ class UserRepository extends BaseRepository
     protected $fieldSearchable = [
         'name',
         'email',
-        'password'
+        'password',
+        'api_user',
+        'api_password',
+        'api_gid',
+        'api_uid',
+        'price',
     ];
 
     /**

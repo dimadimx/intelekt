@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\User;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -30,7 +31,7 @@ class UpdateUserRequest extends FormRequest
           'email'    => 'required|email|unique:users,email,'.$id,
           'password' => 'confirmed'
         ];
-        
+
         return $rules;
     }
 }

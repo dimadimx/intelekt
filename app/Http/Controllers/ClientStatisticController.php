@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ClientStatisticDataTable;
+use App\Http\Requests;
 use App\Http\Requests\CreateClientStatisticRequest;
 use App\Http\Requests\UpdateClientStatisticRequest;
 use App\Repositories\ClientStatisticRepository;
-use App\Http\Controllers\AppBaseController;
-use Illuminate\Http\Request;
 use Flash;
+use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\Auth;
 use Response;
 
 class ClientStatisticController extends AppBaseController
@@ -23,16 +25,12 @@ class ClientStatisticController extends AppBaseController
     /**
      * Display a listing of the ClientStatistic.
      *
-     * @param Request $request
-     *
+     * @param ClientStatisticDataTable $clientStatisticDataTable
      * @return Response
      */
-    public function index(Request $request)
+    public function index(ClientStatisticDataTable $clientStatisticDataTable)
     {
-        $clientStatistics = $this->clientStatisticRepository->all();
-
-        return view('client_statistics.index')
-            ->with('clientStatistics', $clientStatistics);
+        return $clientStatisticDataTable->render('client_statistics.index');
     }
 
     /**
@@ -66,7 +64,7 @@ class ClientStatisticController extends AppBaseController
     /**
      * Display the specified ClientStatistic.
      *
-     * @param int $id
+     * @param  int $id
      *
      * @return Response
      */
@@ -74,7 +72,7 @@ class ClientStatisticController extends AppBaseController
     {
         $clientStatistic = $this->clientStatisticRepository->find($id);
 
-        if (empty($clientStatistic)) {
+        if (empty($clientStatistic) or $clientStatistic->user_id != Auth::user()->id) {
             Flash::error('Client Statistic not found');
 
             return redirect(route('clientStatistics.index'));
@@ -86,7 +84,7 @@ class ClientStatisticController extends AppBaseController
     /**
      * Show the form for editing the specified ClientStatistic.
      *
-     * @param int $id
+     * @param  int $id
      *
      * @return Response
      */
@@ -94,7 +92,7 @@ class ClientStatisticController extends AppBaseController
     {
         $clientStatistic = $this->clientStatisticRepository->find($id);
 
-        if (empty($clientStatistic)) {
+        if (empty($clientStatistic) or $clientStatistic->user_id != Auth::user()->id) {
             Flash::error('Client Statistic not found');
 
             return redirect(route('clientStatistics.index'));
@@ -106,7 +104,7 @@ class ClientStatisticController extends AppBaseController
     /**
      * Update the specified ClientStatistic in storage.
      *
-     * @param int $id
+     * @param  int              $id
      * @param UpdateClientStatisticRequest $request
      *
      * @return Response
@@ -115,7 +113,7 @@ class ClientStatisticController extends AppBaseController
     {
         $clientStatistic = $this->clientStatisticRepository->find($id);
 
-        if (empty($clientStatistic)) {
+        if (empty($clientStatistic) or $clientStatistic->user_id != Auth::user()->id) {
             Flash::error('Client Statistic not found');
 
             return redirect(route('clientStatistics.index'));
@@ -131,9 +129,7 @@ class ClientStatisticController extends AppBaseController
     /**
      * Remove the specified ClientStatistic from storage.
      *
-     * @param int $id
-     *
-     * @throws \Exception
+     * @param  int $id
      *
      * @return Response
      */
@@ -141,7 +137,7 @@ class ClientStatisticController extends AppBaseController
     {
         $clientStatistic = $this->clientStatisticRepository->find($id);
 
-        if (empty($clientStatistic)) {
+        if (empty($clientStatistic) or $clientStatistic->user_id != Auth::user()->id) {
             Flash::error('Client Statistic not found');
 
             return redirect(route('clientStatistics.index'));

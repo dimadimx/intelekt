@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\UserDataTable;
+use App\Http\Requests;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Repositories\UserRepository;
-use App\Http\Controllers\AppBaseController;
-use Illuminate\Http\Request;
 use Flash;
+use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\Auth;
 use Response;
 use Hash;
 
@@ -24,15 +26,12 @@ class UserController extends AppBaseController
     /**
      * Display a listing of the User.
      *
-     * @param Request $request
-     *
+     * @param UserDataTable $userDataTable
      * @return Response
      */
-    public function index(Request $request)
+    public function index(UserDataTable $userDataTable)
     {
-        $users = $this->userRepository->all();
-
-        return view('users.index')->with('users', $users);
+        return $userDataTable->render('users.index');
     }
 
     /**
@@ -66,7 +65,7 @@ class UserController extends AppBaseController
     /**
      * Display the specified User.
      *
-     * @param int $id
+     * @param  int $id
      *
      * @return Response
      */
@@ -74,7 +73,7 @@ class UserController extends AppBaseController
     {
         $user = $this->userRepository->find($id);
 
-        if (empty($user)) {
+        if (empty($user) or ($user->id != Auth::user()->id and Auth::user()->id != 1)) {
             Flash::error('User not found');
 
             return redirect(route('users.index'));
@@ -86,7 +85,7 @@ class UserController extends AppBaseController
     /**
      * Show the form for editing the specified User.
      *
-     * @param int $id
+     * @param  int $id
      *
      * @return Response
      */
@@ -94,7 +93,7 @@ class UserController extends AppBaseController
     {
         $user = $this->userRepository->find($id);
 
-        if (empty($user)) {
+        if (empty($user) or ($user->id != Auth::user()->id and Auth::user()->id != 1)) {
             Flash::error('User not found');
 
             return redirect(route('users.index'));
@@ -106,7 +105,7 @@ class UserController extends AppBaseController
     /**
      * Update the specified User in storage.
      *
-     * @param int $id
+     * @param  int              $id
      * @param UpdateUserRequest $request
      *
      * @return Response
@@ -115,7 +114,7 @@ class UserController extends AppBaseController
     {
         $user = $this->userRepository->find($id);
 
-        if (empty($user)) {
+        if (empty($user) or ($user->id != Auth::user()->id and Auth::user()->id != 1)) {
             Flash::error('User not found');
 
             return redirect(route('users.index'));
@@ -136,7 +135,7 @@ class UserController extends AppBaseController
     /**
      * Remove the specified User from storage.
      *
-     * @param int $id
+     * @param  int $id
      *
      * @throws \Exception
      *
@@ -146,7 +145,7 @@ class UserController extends AppBaseController
     {
         $user = $this->userRepository->find($id);
 
-        if (empty($user)) {
+        if (empty($user) or ($user->id != Auth::user()->id and Auth::user()->id != 1)) {
             Flash::error('User not found');
 
             return redirect(route('users.index'));
