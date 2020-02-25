@@ -7,7 +7,7 @@
 <!-- Date Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('date', 'Date:') !!}
-    {!! Form::date('date', null, ['class' => 'form-control','id'=>'date']) !!}
+    {!! Form::text('date', null, ['class' => 'form-control','id'=>'date']) !!}
 </div>
 
 @push('scripts')

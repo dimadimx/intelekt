@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Client;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
@@ -39,7 +40,11 @@ class ClientDataTable extends DataTable
      */
     public function query(Client $model)
     {
-        return $model->newQuery();
+        $query = $model->newQuery();
+
+        $query->where('user_id', Auth::user()->id);
+
+        return $query;
     }
 
     /**

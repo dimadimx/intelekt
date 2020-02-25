@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\ClientStatistic;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
@@ -39,7 +40,11 @@ class ClientStatisticDataTable extends DataTable
      */
     public function query(ClientStatistic $model)
     {
-        return $model->newQuery();
+        $query = $model->newQuery();
+
+        $query->whereIn('client_id', Auth::user()->clients->pluck('id'));
+
+        return $query;
     }
 
     /**

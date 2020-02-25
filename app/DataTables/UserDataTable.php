@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
@@ -29,7 +30,13 @@ class UserDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->newQuery();
+        $query = $model->newQuery();
+
+        if (Auth::user()->id != 1) {
+            $query->where('id', Auth::user()->id);
+        }
+
+        return $query;
     }
 
     /**

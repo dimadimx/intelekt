@@ -37,7 +37,7 @@
 <!-- Registration Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('registration', 'Registration:') !!}
-    {!! Form::date('registration', null, ['class' => 'form-control','id'=>'registration']) !!}
+    {!! Form::text('registration', null, ['class' => 'form-control','id'=>'registration']) !!}
 </div>
 
 @push('scripts')
