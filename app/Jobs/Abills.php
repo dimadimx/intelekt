@@ -21,10 +21,12 @@ class Abills implements ShouldQueue {
      * @var string
      */
     private $host = 'http://billing.intelekt.cv.ua/admin/index.cgi';
+
     /**
      * @var string
      */
     private $cookieFile = 'framework/cache/intelekt';
+
     /**
      * @var string
      */
