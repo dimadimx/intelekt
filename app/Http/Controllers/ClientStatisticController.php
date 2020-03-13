@@ -6,9 +6,11 @@ use App\DataTables\ClientStatisticDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateClientStatisticRequest;
 use App\Http\Requests\UpdateClientStatisticRequest;
+use App\Jobs\Abills;
 use App\Repositories\ClientStatisticRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Response;
 
@@ -146,6 +148,18 @@ class ClientStatisticController extends AppBaseController
         $this->clientStatisticRepository->delete($id);
 
         Flash::success('Client Statistic deleted successfully.');
+
+        return redirect(route('clientStatistics.index'));
+    }
+
+    /**
+     * sync clients sessions in storage.
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function syncSessions(Request $request)
+    {
+        Abills::dispatch(Auth::user(), $request->get('date'));
 
         return redirect(route('clientStatistics.index'));
     }

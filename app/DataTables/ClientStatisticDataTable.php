@@ -22,14 +22,15 @@ class ClientStatisticDataTable extends DataTable
         return $dataTable
             ->addColumn('action', 'client_statistics.datatables_actions')
             ->editColumn('client_id', function ($data) {
-                return $data->client_id. ' ('.$data->client->login.')';
+                return $data->client_id. ' (<a target="_blank" href="//billing.intelekt.cv.ua/admin/index.cgi?index=15&UID='.$data->client->api_uid.'">'.$data->client->login.'</a>)';
             })
             ->editColumn('date', function ($data) {
                 return $data->date->format('d-m-Y');
             })
             ->filterColumn('date', function ($query, $keyword) {
                 $query->whereRaw("DATE_FORMAT(date,'%d-%m-%Y') like ?", ["%$keyword%"]);
-            });
+            })
+            ->rawColumns(['client_id', 'action']);
     }
 
     /**

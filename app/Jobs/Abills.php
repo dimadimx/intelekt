@@ -50,24 +50,17 @@ class Abills implements ShouldQueue {
     /**
      * @var null|string
      */
-    public $from;
-
-    /**
-     * @var null|string
-     */
-    public $to;
+    public $date;
 
     /**
      * Abills constructor.
      *
      * @param \App\User   $user
-     * @param null|string $from
-     * @param null|string $to
+     * @param null|string $date
      */
-    public function __construct(User $user, $from = NULL, $to = NULL) {
+    public function __construct(User $user, $date = NULL) {
         $this->user = $user;
-        $this->from = $from;
-        $this->to   = $to;
+        $this->date = $date;
     }
 
     /**
@@ -75,7 +68,7 @@ class Abills implements ShouldQueue {
      * @param \App\Repositories\ClientStatisticRepository $clientStatisticRepository
      */
     public function handle(ClientRepository $clientRepository, ClientStatisticRepository $clientStatisticRepository) {
-        if ($this->from and $this->to) {
+        if ($this->date) {
             $this->updateClientsSessions($clientRepository, $clientStatisticRepository);
         } else {
             $this->updateGroupClients($clientRepository);
@@ -89,32 +82,42 @@ class Abills implements ShouldQueue {
      */
     public function updateClientsSessions(ClientRepository $clientRepository, ClientStatisticRepository $clientStatisticRepository) {
         $clients = $clientRepository->findAllByAttributes(['user_id' => $this->user->id]);
+        $xml = true;
         foreach ($clients as $client) {
-            $clientSessions = $this->getSessionsClientByPeriod(
-                $client, $this->from, $this->to
-            );
+            $clientSessions = $this->getSessionsClientByPeriod($client, $xml);
             if ( ! empty($clientSessions['TYPE']) and $clientSessions['TYPE'] == 'error') {
                 $this->auth();
-                $clientSessions = $this->getSessionsClientByPeriod(
-                    $client, $this->from, $this->to
-                );
+                $clientSessions = $this->getSessionsClientByPeriod($client, $xml);
             }
 
             $data = [
                 'client_id' => $client->id,
-                'date' => date('Y-m-d 00:00:00', strtotime($this->from)),
+                'date' => date('Y-m-1 00:00:00', strtotime($this->date)),
             ];
 
-            if ( ! empty($clientSessions['_INFO']['__SESSIONS'])) {
-                $data['status'] = 1;
+            if ($xml) {
+                $xml = simplexml_load_string($clientSessions);
+                $json = json_encode($xml);
+                $array = json_decode($json,TRUE);
+                $totalTime = (int)strtr(last($array['INFO']['TOTALS_AVG']['TABLE']['DATA']['ROW'][0]['TD']), [ ' ' => '', '+' => '', ':' => '']);
+
+                if ( $totalTime > 0 ) {
+                    $data['status'] = 1;
+                } else {
+                    $data['status'] = 0;
+                }
             } else {
-                $data['status'] = 0;
+                if ( ! empty($clientSessions['_INFO']['__SESSIONS'])) {
+                    $data['status'] = 1;
+                } else {
+                    $data['status'] = 0;
+                }
             }
 
             $clientStatistics = $clientStatisticRepository->findAllByAttributes([
                 'client_id' => $client->id,
-                'date >='    => date('Y-m-d 00:00:00', strtotime($this->from)),
-                'date <='    => date('Y-m-d 23:59:59', strtotime($this->to))
+                'date >='    => date('Y-m-1 00:00:00', strtotime($this->date)),
+                'date <='    => date('Y-m-t 23:59:59', strtotime($this->date))
             ]);
 
             if ($clientStatistics->isEmpty()) {
@@ -303,21 +306,25 @@ class Abills implements ShouldQueue {
 
     /**
      * @param \App\Models\Client $client
-     * @param string             $from
-     * @param string             $to
+     * @param boolean $is_xml
      *
      * @return mixed
      */
-    private function getSessionsClientByPeriod(Client $client, string $from, string $to) {
+    private function getSessionsClientByPeriod(Client $client, $is_xml = false) {
         $params = [
             "UID"       => $client->api_uid,
             "qindex"    => 139,
             "header"    => 1,
-            "json"      => 1,
-            "FROM_DATE" => $from,
-            "TO_DATE"   => $to,
+            "FROM_DATE" => date('Y-m-1', strtotime($this->date)),
+            "TO_DATE"   => date('Y-m-t', strtotime($this->date)),
             "rows"      => 3,
         ];
+
+        if ($is_xml) {
+            $params['xml'] = 1;
+        } else {
+            $params['json'] = 1;
+        }
 
         $response = Curl::to($this->host)
             ->withData($params)
@@ -327,9 +334,11 @@ class Abills implements ShouldQueue {
             //            ->asJson(TRUE)
             ->post();
 
-        $response = json_decode(
-            str_replace('} "stats"', '}, "stats"', $response), TRUE
-        );
+        if (!$is_xml) {
+            $response = json_decode(
+                str_replace('} "stats"', '}, "stats"', $response), TRUE
+            );
+        }
 
         return $response;
     }
