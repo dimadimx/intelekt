@@ -10,7 +10,6 @@
     "require": {
         "php": "^7.2",
         "appointer/swaggervel": "dev-master",
-        "danog/madelineproto": "^5.0",
         "doctrine/dbal": "~2.3",
         "fideloper/proxy": "^4.0",
         "infyomlabs/adminlte-templates": "6.0.x-dev",
@@ -18,12 +17,12 @@
         "infyomlabs/swagger-generator": "dev-master",
         "ixudra/curl": "^6.18",
         "laravel/framework": "^6.0",
-        "laravel/horizon": "^3",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^6.0",
         "yajra/laravel-datatables-buttons": "^4.6",
         "yajra/laravel-datatables-html": "^4.4",
-        "yajra/laravel-datatables-oracle": "~9.0"
+        "yajra/laravel-datatables-oracle": "~9.0",
+        "danog/madelineproto": "^5.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.6",
