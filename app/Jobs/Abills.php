@@ -11,6 +11,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 use Ixudra\Curl\Facades\Curl;
 
 class Abills implements ShouldQueue {
@@ -85,10 +86,6 @@ class Abills implements ShouldQueue {
         $xml = true;
         foreach ($clients as $client) {
             $clientSessions = $this->getSessionsClientByPeriod($client, $xml);
-            if ( ! empty($clientSessions['TYPE']) and $clientSessions['TYPE'] == 'error') {
-                $this->auth();
-                $clientSessions = $this->getSessionsClientByPeriod($client, $xml);
-            }
 
             $data = [
                 'client_id' => $client->id,
@@ -99,6 +96,14 @@ class Abills implements ShouldQueue {
                 $xml = simplexml_load_string($clientSessions);
                 $json = json_encode($xml);
                 $array = json_decode($json,TRUE);
+                if ( ! empty($array['TYPE']) and $array['TYPE'] == 'error') {
+                    $this->auth();
+                    $clientSessions = $this->getSessionsClientByPeriod($client, $xml);
+                    $xml = simplexml_load_string($clientSessions);
+                    $json = json_encode($xml);
+                    $array = json_decode($json,TRUE);
+                }
+
                 $totalTime = (int)strtr(last($array['INFO']['TOTALS_AVG']['TABLE']['DATA']['ROW'][0]['TD']), [ ' ' => '', '+' => '', ':' => '']);
 
                 if ( $totalTime > 0 ) {
@@ -107,6 +112,11 @@ class Abills implements ShouldQueue {
                     $data['status'] = 0;
                 }
             } else {
+                if ( ! empty($clientSessions['TYPE']) and $clientSessions['TYPE'] == 'error') {
+                    $this->auth();
+                    $clientSessions = $this->getSessionsClientByPeriod($client, $xml);
+                }
+
                 if ( ! empty($clientSessions['_INFO']['__SESSIONS'])) {
                     $data['status'] = 1;
                 } else {
@@ -224,7 +234,7 @@ class Abills implements ShouldQueue {
      * auth into billing
      */
     private function auth() {
-        Curl::to($this->host)
+       Curl::to($this->host)
             ->withData(
                 [
                     "DOMAIN_ID",
