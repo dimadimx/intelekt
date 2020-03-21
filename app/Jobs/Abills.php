@@ -12,11 +12,12 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
+use Imtigger\LaravelJobStatus\Trackable;
 use Ixudra\Curl\Facades\Curl;
 
 class Abills implements ShouldQueue {
 
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Trackable;
 
     /**
      * The number of seconds the job can run before timing out.
@@ -76,6 +77,12 @@ class Abills implements ShouldQueue {
     public function __construct(User $user, $date = NULL) {
         $this->user = $user;
         $this->date = $date;
+        $key = '-clients';
+        if ($this->date) {
+            $key = '-statistic';
+        }
+        $this->prepareStatus(['key' => $this->user->id.$key]);
+        $this->setInput(['user' => $this->user, 'date' => $this->date]);
     }
 
     /**
@@ -101,8 +108,9 @@ class Abills implements ShouldQueue {
      */
     public function updateClientsSessions(ClientRepository $clientRepository, ClientStatisticRepository $clientStatisticRepository) {
         $clients = $clientRepository->findAllByAttributes(['user_id' => $this->user->id]);
+        $this->setProgressMax($clients->count());
         $xml = true;
-        foreach ($clients as $client) {
+        foreach ($clients as $kay => $client) {
             $clientSessions = $this->getSessionsClientByPeriod($client, $xml);
 
             $data = [
@@ -165,8 +173,10 @@ class Abills implements ShouldQueue {
                 $clientStatisticRepository->update($data, $clientStatistics->first()->id);
                 Log::info('updated');
             }
+            $this->setProgressNow(++$kay);
             sleep(1);
         }
+        $this->setOutput(['total' => $clients->count(), 'other' => ['user' => $this->user, 'date' => $this->date]]);
         Log::info('end updateClientsSessions');
     }
 

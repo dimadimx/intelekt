@@ -12,6 +12,7 @@ use Flash;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Imtigger\LaravelJobStatus\JobStatus;
 use Response;
 
 class ClientStatisticController extends AppBaseController
@@ -32,7 +33,9 @@ class ClientStatisticController extends AppBaseController
      */
     public function index(ClientStatisticDataTable $clientStatisticDataTable)
     {
-        return $clientStatisticDataTable->render('client_statistics.index');
+        return $clientStatisticDataTable->render('client_statistics.index',[
+            'jobStatus' => JobStatus::whereKey(Auth::user()->id.'-statistic')->firstOrFail()
+        ]);
     }
 
     /**
