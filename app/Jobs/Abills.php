@@ -109,7 +109,7 @@ class Abills implements ShouldQueue {
                 'client_id' => $client->id,
                 'date' => date('Y-m-1 00:00:00', strtotime($this->date)),
             ];
-            Log::info('client', $data);
+
             if ($xml) {
                 $xml = simplexml_load_string($clientSessions);
                 $json = json_encode($xml);
@@ -157,7 +157,7 @@ class Abills implements ShouldQueue {
                 'date >='    => date('Y-m-1 00:00:00', strtotime($this->date)),
                 'date <='    => date('Y-m-t 23:59:59', strtotime($this->date))
             ]);
-
+            Log::info('client', $data);
             if ($clientStatistics->isEmpty()) {
                 $clientStatisticRepository->create($data);
                 Log::info('created');
