@@ -8,6 +8,16 @@
         </h1>
     </section>
     <div class="content">
+        @if ($JobStatus)
+            <div class="clearfix"></div>
+            <div class="progress progress-sm active">
+                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                    <span class="sr-only">20% Complete</span>
+                </div>
+            </div>
+            {{ var_dump($JobStatus)}}
+        @endif
+
         <div class="clearfix"></div>
 
         @include('flash::message')

@@ -77,11 +77,7 @@ class Abills implements ShouldQueue {
     public function __construct(User $user, $date = NULL) {
         $this->user = $user;
         $this->date = $date;
-        $key = '-clients';
-        if ($this->date) {
-            $key = '-statistic';
-        }
-        $this->prepareStatus(['key' => $this->user->id.$key]);
+        $this->prepareStatus();
         $this->setInput(['user' => $this->user, 'date' => $this->date]);
     }
 

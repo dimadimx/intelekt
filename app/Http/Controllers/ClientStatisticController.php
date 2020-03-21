@@ -33,8 +33,13 @@ class ClientStatisticController extends AppBaseController
      */
     public function index(ClientStatisticDataTable $clientStatisticDataTable)
     {
-        return $clientStatisticDataTable->render('client_statistics.index',[
-            'jobStatus' => JobStatus::whereKey(Auth::user()->id.'-statistic')->firstOrFail()
+        $JobStatus = NULL;
+        if (session('clientStatisticsJobStatusId')) {
+            $JobStatus = JobStatus::find(session('clientStatisticsJobStatusId'));
+        }
+
+        return $clientStatisticDataTable->render('client_statistics.index', [
+            'JobStatus' => $JobStatus
         ]);
     }
 
@@ -162,8 +167,9 @@ class ClientStatisticController extends AppBaseController
      */
     public function syncSessions(Request $request)
     {
-        Abills::dispatch(Auth::user(), $request->get('date'));
-
+        $job = new Abills(Auth::user(), $request->get('date'));
+        $this->dispatch($job);
+        session('clientStatisticsJobStatusId', $job->getJobStatusId());
         return redirect(route('clientStatistics.index'));
     }
 }
