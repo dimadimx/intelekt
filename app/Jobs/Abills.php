@@ -19,6 +19,20 @@ class Abills implements ShouldQueue {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
+     * The number of seconds the job can run before timing out.
+     *
+     * @var int
+     */
+    public $timeout = 86000;
+
+    /**
+     * The number of times the job may be attempted.
+     *
+     * @var int
+     */
+    public $tries = 1;
+
+    /**
      * @var string
      */
     private $host = 'http://billing.intelekt.cv.ua/admin/index.cgi';
@@ -104,12 +118,17 @@ class Abills implements ShouldQueue {
                     $array = json_decode($json,TRUE);
                 }
 
-                $totalTime = (int)strtr(last($array['INFO']['TOTALS_AVG']['TABLE']['DATA']['ROW'][0]['TD']), [ ' ' => '', '+' => '', ':' => '']);
+                if (isset($array['INFO'])) {
+                    $totalTime = (int)strtr(last($array['INFO']['TOTALS_AVG']['TABLE']['DATA']['ROW'][0]['TD']), [ ' ' => '', '+' => '', ':' => '']);
 
-                if ( $totalTime > 0 ) {
-                    $data['status'] = 1;
+                    if ( $totalTime > 0 ) {
+                        $data['status'] = 1;
+                    } else {
+                        $data['status'] = 0;
+                    }
                 } else {
-                    $data['status'] = 0;
+                    Log::warning('xml Abills:', $array);
+                    $data['status'] = 2;
                 }
             } else {
                 if ( ! empty($clientSessions['TYPE']) and $clientSessions['TYPE'] == 'error') {
@@ -117,10 +136,15 @@ class Abills implements ShouldQueue {
                     $clientSessions = $this->getSessionsClientByPeriod($client, $xml);
                 }
 
-                if ( ! empty($clientSessions['_INFO']['__SESSIONS'])) {
-                    $data['status'] = 1;
+                if (isset($clientSessions['_INFO'])) {
+                    if ( ! empty($clientSessions['_INFO']['__SESSIONS'])) {
+                        $data['status'] = 1;
+                    } else {
+                        $data['status'] = 0;
+                    }
                 } else {
-                    $data['status'] = 0;
+                    Log::warning('json Abills:', $clientSessions);
+                    $data['status'] = 2;
                 }
             }
 
@@ -135,7 +159,7 @@ class Abills implements ShouldQueue {
             } else {
                 $clientStatisticRepository->update($data, $clientStatistics->first()->id);
             }
-            sleep(2);
+            sleep(1);
         }
     }
 
