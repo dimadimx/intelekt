@@ -84,10 +84,14 @@ class Abills implements ShouldQueue {
      */
     public function handle(ClientRepository $clientRepository, ClientStatisticRepository $clientStatisticRepository) {
         if ($this->date) {
+            Log::info('updateClientsSessions');
             $this->updateClientsSessions($clientRepository, $clientStatisticRepository);
         } else {
+            Log::info('updateGroupClients');
             $this->updateGroupClients($clientRepository);
+            Log::info('end updateGroupClients & updateBelongsClients');
             $this->updateBelongsClients($clientRepository);
+            Log::info('end updateBelongsClients');
         }
     }
 
@@ -105,7 +109,7 @@ class Abills implements ShouldQueue {
                 'client_id' => $client->id,
                 'date' => date('Y-m-1 00:00:00', strtotime($this->date)),
             ];
-
+            Log::info('client', $data);
             if ($xml) {
                 $xml = simplexml_load_string($clientSessions);
                 $json = json_encode($xml);
@@ -156,11 +160,14 @@ class Abills implements ShouldQueue {
 
             if ($clientStatistics->isEmpty()) {
                 $clientStatisticRepository->create($data);
+                Log::info('created');
             } else {
                 $clientStatisticRepository->update($data, $clientStatistics->first()->id);
+                Log::info('updated');
             }
             sleep(1);
         }
+        Log::info('end updateClientsSessions');
     }
 
     /**
