@@ -102,6 +102,7 @@ class Abills implements ShouldQueue {
             Log::info('end updateGroupClients & updateBelongsClients');
             $this->updateBelongsClients($clientRepository);
             Log::info('end updateBelongsClients');
+            $this->setOutput(['total' => 'done']);
         }
     }
 
@@ -112,7 +113,7 @@ class Abills implements ShouldQueue {
     public function updateClientsSessions(ClientRepository $clientRepository, ClientStatisticRepository $clientStatisticRepository) {
         $clients = $clientRepository->findAllByAttributes(['user_id' => $this->user->id]);
         $this->setProgressMax($clients->count());
-        foreach ($clients as $kay => $client) {
+        foreach ($clients as $key => $client) {
             $clientSessions = $this->getSessionsClientByPeriod($client);
 
             $data = [
@@ -173,7 +174,7 @@ class Abills implements ShouldQueue {
                 $clientStatisticRepository->update($data, $clientStatistics->first()->id);
                 Log::info('updated');
             }
-            $this->setProgressNow(++$kay);
+            $this->setProgressNow(++$key);
             sleep(1);
         }
         $this->setOutput(['total' => $clients->count(), 'other' => ['user_id' => $this->user->id, 'date' => $this->date]]);
@@ -194,9 +195,10 @@ class Abills implements ShouldQueue {
             $clientRepository->updateAllByAttributes(
                 ['warning' => 1], ['api_belong_uid' => $this->user->api_uid]
             );
-            foreach ($clients['DATA_1'] as $client) {
+            $this->setProgressMax(count($clients['DATA_1']));
+            foreach ($clients['DATA_1'] as $key => $client) {
                 $foundClient = $clientRepository->findByAttribute(
-                    'api_uid', $client['uid']
+                    'login', $client['login']
                 );
                 if ($foundClient->isEmpty()) {
                     $clientRepository->create(
@@ -224,6 +226,7 @@ class Abills implements ShouldQueue {
                     }
                     $clientRepository->update($data, $foundClient->first()->id);
                 }
+                $this->setProgressNow(++$key);
             }
         }
     }
@@ -242,9 +245,10 @@ class Abills implements ShouldQueue {
             $clientRepository->updateAllByAttributes(
                 ['warning' => 1], ['api_gid' => $this->user->api_gid]
             );
-            foreach ($clients['DATA_1'] as $client) {
+            $this->setProgressMax(count($clients['DATA_1']));
+            foreach ($clients['DATA_1'] as $key => $client) {
                 $foundClient = $clientRepository->findByAttribute(
-                    'api_uid', $client['uid']
+                    'login', $client['login']
                 );
                 if ($foundClient->isEmpty()) {
                     $clientRepository->create(
@@ -267,6 +271,7 @@ class Abills implements ShouldQueue {
                     }
                     $clientRepository->update($data, $foundClient->first()->id);
                 }
+                $this->setProgressNow(++$key);
             }
         }
     }
