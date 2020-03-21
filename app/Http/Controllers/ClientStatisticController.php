@@ -169,7 +169,7 @@ class ClientStatisticController extends AppBaseController
     {
         $job = new Abills(Auth::user(), $request->get('date'));
         $this->dispatch($job);
-        session('clientStatisticsJobStatusId', $job->getJobStatusId());
+        $request->session()->put('clientStatisticsJobStatusId', $job->getJobStatusId());
         return redirect(route('clientStatistics.index'));
     }
 }

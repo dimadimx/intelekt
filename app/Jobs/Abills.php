@@ -69,16 +69,23 @@ class Abills implements ShouldQueue {
     public $date;
 
     /**
+     * @var boolean
+     */
+    public $xml;
+
+    /**
      * Abills constructor.
      *
      * @param \App\User   $user
      * @param null|string $date
+     * @param boolean $xml
      */
-    public function __construct(User $user, $date = NULL) {
+    public function __construct(User $user, $date = NULL, $xml = FALSE) {
         $this->user = $user;
         $this->date = $date;
+        $this->xml = $xml;
         $this->prepareStatus();
-        $this->setInput(['user' => $this->user, 'date' => $this->date]);
+        $this->setInput(['user_id' => $this->user->id, 'date' => $this->date]);
     }
 
     /**
@@ -105,24 +112,21 @@ class Abills implements ShouldQueue {
     public function updateClientsSessions(ClientRepository $clientRepository, ClientStatisticRepository $clientStatisticRepository) {
         $clients = $clientRepository->findAllByAttributes(['user_id' => $this->user->id]);
         $this->setProgressMax($clients->count());
-        $xml = true;
         foreach ($clients as $kay => $client) {
-            $clientSessions = $this->getSessionsClientByPeriod($client, $xml);
+            $clientSessions = $this->getSessionsClientByPeriod($client);
 
             $data = [
                 'client_id' => $client->id,
                 'date' => date('Y-m-1 00:00:00', strtotime($this->date)),
             ];
 
-            if ($xml) {
-                $xml = simplexml_load_string($clientSessions);
-                $json = json_encode($xml);
+            if ($this->xml) {
+                $json = json_encode(simplexml_load_string($clientSessions));
                 $array = json_decode($json,TRUE);
                 if ( ! empty($array['TYPE']) and $array['TYPE'] == 'error') {
                     $this->auth();
-                    $clientSessions = $this->getSessionsClientByPeriod($client, $xml);
-                    $xml = simplexml_load_string($clientSessions);
-                    $json = json_encode($xml);
+                    $clientSessions = $this->getSessionsClientByPeriod($client);
+                    $json = json_encode(simplexml_load_string($clientSessions));
                     $array = json_decode($json,TRUE);
                 }
 
@@ -141,7 +145,7 @@ class Abills implements ShouldQueue {
             } else {
                 if ( ! empty($clientSessions['TYPE']) and $clientSessions['TYPE'] == 'error') {
                     $this->auth();
-                    $clientSessions = $this->getSessionsClientByPeriod($client, $xml);
+                    $clientSessions = $this->getSessionsClientByPeriod($client);
                 }
 
                 if (isset($clientSessions['_INFO'])) {
@@ -172,7 +176,7 @@ class Abills implements ShouldQueue {
             $this->setProgressNow(++$kay);
             sleep(1);
         }
-        $this->setOutput(['total' => $clients->count(), 'other' => ['user' => $this->user, 'date' => $this->date]]);
+        $this->setOutput(['total' => $clients->count(), 'other' => ['user_id' => $this->user->id, 'date' => $this->date]]);
         Log::info('end updateClientsSessions');
     }
 
@@ -353,11 +357,10 @@ class Abills implements ShouldQueue {
 
     /**
      * @param \App\Models\Client $client
-     * @param boolean $is_xml
      *
      * @return mixed
      */
-    private function getSessionsClientByPeriod(Client $client, $is_xml = false) {
+    private function getSessionsClientByPeriod(Client $client) {
         $params = [
             "UID"       => $client->api_uid,
             "qindex"    => 139,
@@ -367,7 +370,7 @@ class Abills implements ShouldQueue {
             "rows"      => 3,
         ];
 
-        if ($is_xml) {
+        if ($this->xml) {
             $params['xml'] = 1;
         } else {
             $params['json'] = 1;
@@ -381,7 +384,7 @@ class Abills implements ShouldQueue {
             //            ->asJson(TRUE)
             ->post();
 
-        if (!$is_xml) {
+        if (!$this->xml) {
             $response = json_decode(
                 str_replace('} "stats"', '}, "stats"', $response), TRUE
             );

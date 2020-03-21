@@ -11,6 +11,7 @@ use App\Repositories\ClientRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Support\Facades\Auth;
+use Imtigger\LaravelJobStatus\JobStatus;
 use Response;
 
 class ClientController extends AppBaseController
@@ -31,7 +32,13 @@ class ClientController extends AppBaseController
      */
     public function index(ClientDataTable $clientDataTable)
     {
-        return $clientDataTable->render('clients.index');
+        $JobStatus = NULL;
+        if (session('clientJobStatusId')) {
+            $JobStatus = JobStatus::find(session('clientJobStatusId'));
+        }
+        return $clientDataTable->render('clients.index', [
+            'JobStatus' => $JobStatus
+        ]);
     }
 
     /**
@@ -158,7 +165,10 @@ class ClientController extends AppBaseController
      */
     public function sync()
     {
-        Abills::dispatch(Auth::user());
+        $job = new Abills(Auth::user());
+        $this->dispatch($job);
+
+        session(['clientJobStatusId' => $job->getJobStatusId()]);
 
         return redirect(route('clients.index'));
     }
