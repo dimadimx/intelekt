@@ -33,14 +33,7 @@ class ClientStatisticController extends AppBaseController
      */
     public function index(ClientStatisticDataTable $clientStatisticDataTable)
     {
-        $JobStatus = NULL;
-        if (session('clientStatisticsJobStatusId')) {
-            $JobStatus = JobStatus::find(session('clientStatisticsJobStatusId'));
-        }
-
-        return $clientStatisticDataTable->render('client_statistics.index', [
-            'JobStatus' => $JobStatus
-        ]);
+        return $clientStatisticDataTable->render('client_statistics.index');
     }
 
     /**

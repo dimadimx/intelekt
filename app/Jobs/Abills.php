@@ -85,7 +85,7 @@ class Abills implements ShouldQueue {
         $this->date = $date;
         $this->xml = $xml;
         $this->prepareStatus();
-        $this->setInput(['user_id' => $this->user->id, 'date' => $this->date]);
+        $this->update(['input' => $this->user->id]);
     }
 
     /**
@@ -98,11 +98,12 @@ class Abills implements ShouldQueue {
             $this->updateClientsSessions($clientRepository, $clientStatisticRepository);
         } else {
             Log::info('updateGroupClients');
+            $this->setOutput(['title' => 'Clients']);
             $this->updateGroupClients($clientRepository);
             Log::info('end updateGroupClients & updateBelongsClients');
             $this->updateBelongsClients($clientRepository);
             Log::info('end updateBelongsClients');
-            $this->setOutput(['total' => 'done']);
+            $this->setOutput(['total' => $this->progressNow, 'title' => 'Clients']);
         }
     }
 
@@ -112,6 +113,7 @@ class Abills implements ShouldQueue {
      */
     public function updateClientsSessions(ClientRepository $clientRepository, ClientStatisticRepository $clientStatisticRepository) {
         $clients = $clientRepository->findAllByAttributes(['user_id' => $this->user->id]);
+        $this->setOutput(['title' => 'Clients Sessions']);
         $this->setProgressMax($clients->count());
         foreach ($clients as $key => $client) {
             $clientSessions = $this->getSessionsClientByPeriod($client);
@@ -174,10 +176,11 @@ class Abills implements ShouldQueue {
                 $clientStatisticRepository->update($data, $clientStatistics->first()->id);
                 Log::info('updated');
             }
-            $this->setProgressNow(++$key);
+
+            $this->incrementProgress();
             sleep(1);
         }
-        $this->setOutput(['total' => $clients->count(), 'other' => ['user_id' => $this->user->id, 'date' => $this->date]]);
+        $this->setOutput(['total' => $this->progressNow, 'user_id' => $this->user->id, 'date' => $this->date, 'title' => 'Clients Sessions']);
         Log::info('end updateClientsSessions');
     }
 
@@ -195,7 +198,7 @@ class Abills implements ShouldQueue {
             $clientRepository->updateAllByAttributes(
                 ['warning' => 1], ['api_belong_uid' => $this->user->api_uid]
             );
-            $this->setProgressMax(count($clients['DATA_1']));
+            $this->setProgressMax($this->progressMax + count($clients['DATA_1']));
             foreach ($clients['DATA_1'] as $key => $client) {
                 $foundClient = $clientRepository->findByAttribute(
                     'login', $client['login']
@@ -226,7 +229,7 @@ class Abills implements ShouldQueue {
                     }
                     $clientRepository->update($data, $foundClient->first()->id);
                 }
-                $this->setProgressNow(++$key);
+                $this->incrementProgress();
             }
         }
     }
@@ -256,7 +259,7 @@ class Abills implements ShouldQueue {
                             'user_id'      => $this->user->id,
                             'login'        => $client['login'],
                             'phone'        => $client['phone'],
-                            'registration' => $client['registration'],
+                            'registration' => strtotime($client['registration']),
                             'api_gid'      => $client['gid'],
                             'api_uid'      => $client['uid'],
                         ]
@@ -271,7 +274,7 @@ class Abills implements ShouldQueue {
                     }
                     $clientRepository->update($data, $foundClient->first()->id);
                 }
-                $this->setProgressNow(++$key);
+                $this->incrementProgress();
             }
         }
     }

@@ -32,13 +32,7 @@ class ClientController extends AppBaseController
      */
     public function index(ClientDataTable $clientDataTable)
     {
-        $JobStatus = NULL;
-        if (session('clientJobStatusId')) {
-            $JobStatus = JobStatus::find(session('clientJobStatusId'));
-        }
-        return $clientDataTable->render('clients.index', [
-            'JobStatus' => $JobStatus
-        ]);
+        return $clientDataTable->render('clients.index');
     }
 
     /**

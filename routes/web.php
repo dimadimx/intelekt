@@ -27,3 +27,7 @@ Route::post('clientStatistics/sync', 'ClientStatisticController@syncSessions')->
 
 Route::resource('clientStatistics', 'ClientStatisticController')->middleware('auth');
 
+Route::get('jobs', 'JobController@index')->name('JobController.index')->middleware('auth');
+
+Route::post('jobs/lists', 'JobController@ajaxUpdate')->name('JobController.ajaxUpdate')->middleware('auth');
+

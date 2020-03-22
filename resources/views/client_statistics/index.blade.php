@@ -8,15 +8,6 @@
         </h1>
     </section>
     <div class="content">
-        @if ($JobStatus and $JobStatus->status == 'executing')
-            <div class="clearfix"></div>
-            <div class="progress progress-xs active">
-                <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="{{$JobStatus->progress_now}}" aria-valuemin="0" aria-valuemax="{{$JobStatus->progress_max}}" style="width: {{($JobStatus->progress_now * 100) /$JobStatus->progress_max}}%">
-                    <span class="sr-only">{{$JobStatus->progress_now}}% Complete</span>
-                </div>
-            </div>
-        @endif
-
         <div class="clearfix"></div>
 
         @include('flash::message')

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Imtigger\LaravelJobStatus\JobStatus;
 
 /**
  * Class User
@@ -78,5 +79,23 @@ class User extends Authenticatable implements MustVerifyEmail
     public function clients()
     {
         return $this->hasMany(\App\Models\Client::class, 'user_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function jobs()
+    {
+        return $this->hasMany(JobStatus::class, 'input');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function jobsActive()
+    {
+        return $this->hasMany(JobStatus::class, 'input')->get()->filter(function ($value, $key) {
+            return $value->is_executing;
+        });
     }
 }
