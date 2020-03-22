@@ -160,9 +160,8 @@ class ClientStatisticController extends AppBaseController
      */
     public function syncSessions(Request $request)
     {
-        $job = new Abills(Auth::user(), $request->get('date'));
-        $this->dispatch($job);
-        $request->session()->put('clientStatisticsJobStatusId', $job->getJobStatusId());
+        Abills::dispatch(Auth::user(), $request->get('date'));
+        sleep(1);
         return redirect(route('clientStatistics.index'));
     }
 }

@@ -159,11 +159,9 @@ class ClientController extends AppBaseController
      */
     public function sync()
     {
-        $job = new Abills(Auth::user());
-        $this->dispatch($job);
+        Abills::dispatch(Auth::user());
 
-        session(['clientJobStatusId' => $job->getJobStatusId()]);
-
+        sleep(1);
         return redirect(route('clients.index'));
     }
 }

@@ -219,6 +219,7 @@ class Abills implements ShouldQueue {
                     $data = [
                         'api_gid' => $client['gid'],
                         'warning' => NULL,
+                        'registration' => strtotime($client['registration']),
                     ];
                     if ($foundClient->first()->api_belong_uid
                         != $this->user->api_uid and $client['gid']
@@ -268,6 +269,7 @@ class Abills implements ShouldQueue {
                     $data = [
                         'api_gid' => $client['gid'],
                         'warning' => 0,
+                        'registration' => strtotime($client['registration'])
                     ];
                     if ($client['gid'] != $this->user->api_gid) {
                         $data['warning'] = 1;

@@ -52,7 +52,9 @@
                         <li class="dropdown tasks-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-flag-o"></i>
-                                <span class="label label-danger">{{ Auth::user()->jobs->filter(function ($job) { return $job->is_executing; })->count() }}</span>
+                                @if (Auth::user()->jobs->filter(function ($job) { return $job->is_executing; })->count())
+                                    <span class="label label-danger">{{ Auth::user()->jobs->filter(function ($job) { return $job->is_executing; })->count() }}</span>
+                                @endif
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="header">Your active tasks</li>
@@ -209,13 +211,13 @@
                 increaseArea: '20%' // optional
             });
             setInterval(function() {
-                if ($('.your-tasks').length && autoUpdate) {
+                if ($('.your-tasks li').length && autoUpdate) {
                     $.ajax({
                         type:'POST',
                         url:'{{ route("JobController.ajaxUpdate") }}',
                         success:function(data){
                             $('.your-tasks').html(data);
-                            if(!$('.your-tasks').length) {
+                            if(!$('.your-tasks li').length) {
                                 autoUpdate = false;
                             }
                         }
