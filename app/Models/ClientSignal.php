@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Eloquent as Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class ClientSignal
@@ -17,16 +16,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class ClientSignal extends Model
 {
-    use SoftDeletes;
-
     public $table = 'client_signals';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
-
-
-    protected $dates = ['deleted_at'];
-
 
 
     public $fillable = [

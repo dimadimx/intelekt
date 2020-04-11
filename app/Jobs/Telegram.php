@@ -2,10 +2,8 @@
 
 namespace App\Jobs;
 
-use App\Models\Client;
 use App\Repositories\ClientRepository;
 use App\Repositories\ClientSignalRepository;
-use App\Repositories\ClientStatisticRepository;
 use App\User;
 use danog\MadelineProto\API;
 use Illuminate\Bus\Queueable;
@@ -15,7 +13,6 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 use Imtigger\LaravelJobStatus\Trackable;
-use Ixudra\Curl\Facades\Curl;
 
 class Telegram implements ShouldQueue {
 
@@ -65,7 +62,7 @@ class Telegram implements ShouldQueue {
      */
     public function __construct(User $user) {
         $this->user = $user;
-        $this->date = time();
+        $this->date = date('Y-m-d');
         $this->prepareStatus();
         $this->update(['input' => $this->user->id]);
     }
@@ -93,7 +90,8 @@ class Telegram implements ShouldQueue {
                 'client_id' => $client->id,
                 'date' => date('Y-m-d', strtotime($this->date)),
             ];
-            $this->madeline->messages->sendMessage(['peer' => "@IntelektWorkBot", 'message' => "<code>/userinfo_{{$client->login}}</code>", 'parse_mode' => 'HTML']);
+
+            $this->madeline->messages->sendMessage(['peer' => "@IntelektWorkBot", 'message' => "<code>/userinfo_{$client->login}</code>", 'parse_mode' => 'HTML']);
             sleep(10);
             $response = $this->madeline->messages->getHistory([
                 'peer' => "@IntelektWorkBot", //название_канала, должно начинаться с @, например @breakingmash
@@ -109,33 +107,31 @@ class Telegram implements ShouldQueue {
             $filteredMessage = NULL;
             foreach ($response['messages'] as $message) {
                 if (strpos($message['message'], 'Рівень сигналу')) {
-                    $filteredMessage = $message;
+                    $filteredMessage = $message['message'];
                 }
                 if (strpos($message['message'], $client->login) and !is_null($filteredMessage)) {
-                    $splitMessage = preg_split('/(.*), (.*)/', $filteredMessage);
-                    $signalKey = array_search('Рівень сигналу', $splitMessage);
-                    if ($signalKey != false) {
-                        ltrim($splitMessage[$signalKey], ':');
-                        $clientSignal = $clientSignalRepository->findAllByAttributes([
-                            'client_id' => $client->id,
-                            'date >='    => date('Y-m-d 00:00:00', strtotime($this->date)),
-                            'date <='    => date('Y-m-d 23:59:59', strtotime($this->date))
-                        ]);
-                        Log::info('client', $data);
-                        if ($clientSignal->isEmpty()) {
-                            $clientSignalRepository->create($data);
-                            Log::info('created');
-                        } else {
-                            $clientSignalRepository->update($data, $clientSignal->first()->id);
-                            Log::info('updated');
-                        }
+                    $filteredMessage = preg_split('/Рівень сигналу:/', $filteredMessage);
+                    $filteredMessage = preg_split('/IP:/', $filteredMessage[1]);
+                    $filteredMessage = preg_split('/Сесія відсутня/', $filteredMessage[0]);
+                    $data['value'] = trim($filteredMessage[0]);
+                    $clientSignal = $clientSignalRepository->findAllByAttributes([
+                        'client_id' => $client->id,
+                        'date >='    => date('Y-m-d 00:00:00', strtotime($this->date)),
+                        'date <='    => date('Y-m-d 23:59:59', strtotime($this->date))
+                    ]);
+                    Log::info('client signal', $data);
+                    if ($clientSignal->isEmpty()) {
+                        $clientSignalRepository->create($data);
+                        Log::info('created');
+                    } else {
+                        $clientSignalRepository->update($data, $clientSignal->first()->id);
+                        Log::info('updated');
                     }
                     break;
                 }
             }
 
             $this->incrementProgress();
-            exit();
         }
         $this->setOutput(['total' => $this->progressNow, 'user_id' => $this->user->id, 'title' => 'Clients Signals']);
         Log::info('end updateClientsSignal');

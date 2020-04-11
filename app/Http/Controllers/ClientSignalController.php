@@ -158,8 +158,7 @@ class ClientSignalController extends AppBaseController
      */
     public function updateSignals()
     {
-        Telegram::dispatchNow(Auth::user());
-
+        Telegram::dispatch(Auth::user());
         sleep(1);
         return redirect(route('clientSignals.index'));
     }
