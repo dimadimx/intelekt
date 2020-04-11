@@ -90,4 +90,12 @@ class Client extends Model
     {
         return $this->hasMany(\App\Models\ClientStatistic::class, 'client_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function clientSignals()
+    {
+        return $this->hasMany(\App\Models\ClientSignal::class, 'client_id');
+    }
 }

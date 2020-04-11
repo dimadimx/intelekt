@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\Client;
 use App\Repositories\ClientRepository;
 use App\Repositories\ClientSignalRepository;
 use App\User;
@@ -44,6 +45,11 @@ class Telegram implements ShouldQueue {
     public $user;
 
     /**
+     * @var \App\Models\Client
+     */
+    public $client;
+
+    /**
      * @var \danog\MadelineProto\API
      */
     public $madeline;
@@ -54,15 +60,15 @@ class Telegram implements ShouldQueue {
     public $date;
 
     /**
-     * Abills constructor.
+     * Telegram constructor.
      *
-     * @param \App\User   $user
-     * @param null|string $date
-     * @param boolean $xml
+     * @param \App\User               $user
+     * @param \App\Models\Client|NULL $client
      */
-    public function __construct(User $user) {
+    public function __construct(User $user, Client $client = NULL) {
         $this->user = $user;
         $this->date = date('Y-m-d');
+        $this->client = $client;
         $this->prepareStatus();
         $this->update(['input' => $this->user->id]);
     }
@@ -82,7 +88,11 @@ class Telegram implements ShouldQueue {
      * @param \App\Repositories\ClientSignalRepository $clientSignalRepository
      */
     public function updateClientsSignal(ClientRepository $clientRepository, ClientSignalRepository $clientSignalRepository) {
-        $clients = $clientRepository->findAllByAttributes(['user_id' => $this->user->id]);
+        $filterData = ['user_id' => $this->user->id];
+        if ($this->client) {
+            $filterData = ['user_id' => $this->user->id, 'client_id' => $this->client->id];
+        }
+        $clients = $clientRepository->findAllByAttributes($filterData);
         $this->setOutput(['title' => 'Clients Signals']);
         $this->setProgressMax($clients->count());
         foreach ($clients as $key => $client) {
@@ -114,6 +124,10 @@ class Telegram implements ShouldQueue {
                     $filteredMessage = preg_split('/IP:/', $filteredMessage[1]);
                     $filteredMessage = preg_split('/Сесія відсутня/', $filteredMessage[0]);
                     $data['value'] = trim($filteredMessage[0]);
+                    if (!is_numeric($data['value'])) {
+                        $data['comment'] = $data['value'];
+                        $data['value'] = 0;
+                    }
                     $clientSignal = $clientSignalRepository->findAllByAttributes([
                         'client_id' => $client->id,
                         'date >='    => date('Y-m-d 00:00:00', strtotime($this->date)),

@@ -21,6 +21,8 @@ Route::resource('users', 'UserController')->middleware('auth');
 
 Route::get('clients/sync', 'ClientController@sync')->name('clients.sync')->middleware('auth');
 
+Route::get('clients/updateSignal/{id}', 'ClientController@updateSignal')->name('clients.updateSignal')->middleware('auth');
+
 Route::resource('clients', 'ClientController')->middleware('auth');
 
 Route::post('clientStatistics/sync', 'ClientStatisticController@syncSessions')->name('clientStatistics.syncSessions')->middleware('auth');

@@ -25,7 +25,8 @@ class ClientSignal extends Model
     public $fillable = [
         'client_id',
         'date',
-        'value'
+        'value',
+        'comment'
     ];
 
     /**
@@ -37,7 +38,8 @@ class ClientSignal extends Model
         'id' => 'integer',
         'client_id' => 'integer',
         'date' => 'datetime',
-        'value' => 'float'
+        'value' => 'float',
+        'comment' => 'string'
     ];
 
     /**

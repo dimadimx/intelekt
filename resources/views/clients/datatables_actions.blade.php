@@ -1,5 +1,8 @@
 {!! Form::open(['route' => ['clients.destroy', $id], 'method' => 'delete']) !!}
 <div class='btn-group'>
+    <a href="{{ route('clients.updateSignal', $id) }}" class='btn btn-default btn-xs'>
+        <i class="glyphicon glyphicon glyphicon-signal"></i>
+    </a>
     <a href="{{ route('clients.show', $id) }}" class='btn btn-default btn-xs'>
         <i class="glyphicon glyphicon-eye-open"></i>
     </a>

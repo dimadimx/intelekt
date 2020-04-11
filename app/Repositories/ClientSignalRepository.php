@@ -19,7 +19,8 @@ class ClientSignalRepository extends BaseRepository
     protected $fieldSearchable = [
         'client_id',
         'date',
-        'value'
+        'value',
+        'comment'
     ];
 
     /**

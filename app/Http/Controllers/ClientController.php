@@ -165,4 +165,24 @@ class ClientController extends AppBaseController
         sleep(1);
         return redirect(route('clients.index'));
     }
+
+    /**
+     * @param $id
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function updateSignal($id)
+    {
+        $client = $this->clientRepository->find($id);
+
+        if (empty($client) or $client->user_id != Auth::user()->id) {
+            Flash::error('Client not found');
+
+            return redirect(route('clients.index'));
+        }
+        Telegram::dispatch(Auth::user(), $client);
+
+        sleep(1);
+        return redirect(route('clients.index'));
+    }
 }

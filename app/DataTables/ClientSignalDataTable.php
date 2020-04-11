@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\ClientSignal;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
@@ -18,7 +19,17 @@ class ClientSignalDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'client_signals.datatables_actions');
+        return $dataTable
+            ->addColumn('action', 'client_signals.datatables_actions')
+            ->editColumn('client_id', function ($data) {
+                return $data->client_id. ' (<a target="_blank" href="//billing.intelekt.cv.ua/admin/index.cgi?index=15&UID='.$data->client->api_uid.'">'.$data->client->login.'</a>)';
+            })->editColumn('date', function ($data) {
+                return $data->date->format('d-m-Y');
+            })
+            ->filterColumn('date', function ($query, $keyword) {
+                $query->whereRaw("DATE_FORMAT(date,'%d-%m-%Y') like ?", ["%$keyword%"]);
+            })
+            ->rawColumns(['client_id', 'action']);
     }
 
     /**
@@ -29,7 +40,11 @@ class ClientSignalDataTable extends DataTable
      */
     public function query(ClientSignal $model)
     {
-        return $model->newQuery();
+        $query = $model->newQuery();
+
+        $query->whereIn('client_id', Auth::user()->clients->pluck('id'));
+
+        return $query;
     }
 
     /**
@@ -54,6 +69,17 @@ class ClientSignalDataTable extends DataTable
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
                 ],
+                'initComplete' => 'function () {
+                  this.api().columns().every(function () {
+                    var column = this;
+                    var input = document.createElement("input");
+                    $(input).
+                      appendTo($(column.footer()).empty()).
+                      on(\'change\', function () {
+                        column.search($(this).val(), false, false, true).draw();
+                      });
+                  });
+                }'
             ]);
     }
 
@@ -67,7 +93,8 @@ class ClientSignalDataTable extends DataTable
         return [
             'client_id',
             'date',
-            'value'
+            'value',
+            'comment'
         ];
     }
 

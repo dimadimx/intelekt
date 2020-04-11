@@ -27,6 +27,10 @@ class ClientDataTable extends DataTable
             ->editColumn('registration', function ($data) {
                 return $data->registration->format('d-m-Y');
             })
+            ->addColumn('client_signal', function ($data) {
+                $signal = $data->clientSignals->latest();
+                return $signal ? $signal->value : $signal->comment;
+            })
             ->filterColumn('registration', function ($query, $keyword) {
                 $query->whereRaw("DATE_FORMAT(registration,'%d-%m-%Y') like ?", ["%$keyword%"]);
             });
@@ -96,6 +100,7 @@ class ClientDataTable extends DataTable
             'api_gid',
             'api_belong_uid',
             'login',
+            'client_signal',
             'phone',
             'registration',
             'warning'
