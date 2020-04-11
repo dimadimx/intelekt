@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Jobs\Abills;
+use App\Jobs\Telegram;
 use App\Repositories\ClientRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;

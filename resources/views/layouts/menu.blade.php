@@ -11,3 +11,7 @@
 <li class="{{ Request::is('clientStatistics*') ? 'active' : '' }}">
     <a href="{{ route('clientStatistics.index') }}"><i class="fa fa-edit"></i><span>Client Statistics</span></a>
 </li>
+<li class="{{ Request::is('clientSignals*') ? 'active' : '' }}">
+    <a href="{{ route('clientSignals.index') }}"><i class="fa fa-edit"></i><span>Client Signals</span></a>
+</li>
+

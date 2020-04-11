@@ -31,3 +31,6 @@ Route::get('jobs', 'JobController@index')->name('JobController.index')->middlewa
 
 Route::post('jobs/lists', 'JobController@ajaxUpdate')->name('JobController.ajaxUpdate')->middleware('auth');
 
+Route::get('clientSignals/updates', 'ClientSignalController@updateSignals')->name('clientSignals.updateSignals')->middleware('auth');
+
+Route::resource('clientSignals', 'ClientSignalController')->middleware('auth');

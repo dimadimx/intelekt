@@ -6,21 +6,21 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class ClientStatistic
+ * Class ClientSignal
  * @package App\Models
- * @version February 25, 2020, 8:36 am UTC
+ * @version April 11, 2020, 2:47 pm EEST
  *
  * @property \App\Models\Client client
  * @property integer client_id
  * @property string|\Carbon\Carbon date
- * @property boolean status
+ * @property number value
  */
-class ClientStatistic extends Model
+class ClientSignal extends Model
 {
     use SoftDeletes;
 
-    public $table = 'client_statistics';
-
+    public $table = 'client_signals';
+    
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -32,7 +32,7 @@ class ClientStatistic extends Model
     public $fillable = [
         'client_id',
         'date',
-        'status'
+        'value'
     ];
 
     /**
@@ -44,7 +44,7 @@ class ClientStatistic extends Model
         'id' => 'integer',
         'client_id' => 'integer',
         'date' => 'datetime',
-        'status' => 'boolean'
+        'value' => 'float'
     ];
 
     /**
@@ -54,7 +54,7 @@ class ClientStatistic extends Model
      */
     public static $rules = [
         'client_id' => 'required',
-        'status' => 'required'
+        'value' => 'required'
     ];
 
     /**

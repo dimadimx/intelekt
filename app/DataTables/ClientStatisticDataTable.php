@@ -24,11 +24,19 @@ class ClientStatisticDataTable extends DataTable
             ->editColumn('client_id', function ($data) {
                 return $data->client_id. ' (<a target="_blank" href="//billing.intelekt.cv.ua/admin/index.cgi?index=15&UID='.$data->client->api_uid.'">'.$data->client->login.'</a>)';
             })
+            ->addColumn('client_group', function ($data) {
+                return $data->client->api_gid;
+            })
             ->editColumn('date', function ($data) {
                 return $data->date->format('d-m-Y');
             })
             ->filterColumn('date', function ($query, $keyword) {
                 $query->whereRaw("DATE_FORMAT(date,'%d-%m-%Y') like ?", ["%$keyword%"]);
+            })
+            ->filterColumn('client_group', function ($query, $keyword) {
+                $query->whereHas('client', function($q) use($keyword){
+                    $q->where('api_gid', $keyword);
+                });
             })
             ->rawColumns(['client_id', 'action']);
     }
@@ -93,6 +101,7 @@ class ClientStatisticDataTable extends DataTable
     {
         return [
             'client_id',
+            'client_group',
             'date',
             'status'
         ];

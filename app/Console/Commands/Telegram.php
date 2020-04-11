@@ -12,14 +12,14 @@ class Telegram extends Command
      *
      * @var string
      */
-    protected $signature = 'telegram:test';
+    protected $signature = 'telegram:auth';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'auth telegram';
 
     /**
      * @var string
@@ -43,13 +43,15 @@ class Telegram extends Command
      */
     public function handle()
     {
-
         // Если файл с сессией уже существует, использовать его
         if(file_exists( storage_path($this->cookieFile) ) ) {
             $madeline = new API( storage_path($this->cookieFile) );
+            // Запросить код с помощью консоли
+//            $code = 35973;//readline('Enter the code you received: ');
+//            $madeline->complete_phone_login($code);
         } else {
             // Иначе создать новую сессию
-            $madeline = new API([
+            $madeline = new API(storage_path($this->cookieFile), [
                 'app_info' => [
                     'api_id' => 999552,
                     'api_hash' => 'f4693905c15b2868f6682e9df5a13cf9',
@@ -68,13 +70,13 @@ class Telegram extends Command
             $code = readline('Enter the code you received: ');
             $madeline->complete_phone_login($code);
         }
-
-        $messages = $madeline->messages->getHistory(['peer' => '@IntelektWorkBot', 'offset_id' => 0, 'offset_date' => 0, 'add_offset' => 0, 'limit' => 10, 'max_id' => 0, 'min_id' => 0, 'hash' => 0, ]);
-
-        $messages = collect($messages['messages'])->toJson();
+//
+//        $messages = $madeline->messages->getHistory(['peer' => '@IntelektWorkBot', 'offset_id' => 0, 'offset_date' => 0, 'add_offset' => 0, 'limit' => 10, 'max_id' => 0, 'min_id' => 0, 'hash' => 0, ]);
+////
+//        $messages = collect($messages['messages'])->toJson();
 //        foreach($messages['messages'] as $msg) {
-//            arr
-            dump($messages);
+////            arr
+//            dump($messages);
 //        }
 
 //        $settings = [
@@ -129,23 +131,25 @@ class Telegram extends Command
 
 //            $MadelineProto = new \danog\MadelineProto\API('session.madeline');
 //
-//            $settings = array(
-//                'peer' => "@IntelektWorkBot", //название_канала, должно начинаться с @, например @breakingmash
-//                'offset_id' => 0,
-//                'offset_date' => 0,
-//                'add_offset' => 0,
-//                'limit' => 10, //Количество постов, которые вернет клиент
-//                'max_id' => 0, //Максимальный id поста
-//                'min_id' => 0, //Минимальный id поста - использую для пагинации, при  0 возвращаются последние посты.
-//                //'hash' => []
-//            );
-//
-//
-//            $data = $MadelineProto->messages->getHistory($settings);
-////            $data = $MadelineProto->messages->sendMessage(['peer' => "@IntelektWorkBot", 'message' => "<code>/userinfo_myh_ukr66</code>", 'reply_to_msg_id' => isset($update['message']['id']) ? $update['message']['id'] : null, 'parse_mode' => 'HTML']);
-//
-//            echo '<pre>';
-//            print_r($data);
-//            echo '</pre>';
+            $settings = array(
+                'peer' => "@IntelektWorkBot", //название_канала, должно начинаться с @, например @breakingmash
+                'offset_id' => 0,
+                'offset_date' => 0,
+                'add_offset' => 0,
+                'limit' => 10, //Количество постов, которые вернет клиент
+                'max_id' => 0, //Максимальный id поста
+                'min_id' => 0, //Минимальный id поста - использую для пагинации, при  0 возвращаются последние посты.
+                //'hash' => []
+            );
+
+
+            $data = $madeline->messages->getHistory($settings);
+
+//            $data = $madeline->messages->sendMessage(['peer' => "@IntelektWorkBot", 'message' => "<code>/userinfo_myh_ukr66</code>", 'reply_to_msg_id' => isset($update['message']['id']) ? $update['message']['id'] : null, 'parse_mode' => 'HTML']);
+
+            echo '<pre>';
+            print_r($data);
+            echo '</pre>';
+        return null;
     }
 }
