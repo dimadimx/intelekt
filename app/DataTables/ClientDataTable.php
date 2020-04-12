@@ -28,8 +28,8 @@ class ClientDataTable extends DataTable
                 return $data->registration->format('d-m-Y');
             })
             ->addColumn('client_signal', function ($data) {
-                $signal = $data->clientSignals->latest();
-                return $signal ? $signal->value : $signal->comment;
+                $signal = $data->clientSignals->first();
+                return $signal ? $signal->value : 'NULL';
             })
             ->filterColumn('registration', function ($query, $keyword) {
                 $query->whereRaw("DATE_FORMAT(registration,'%d-%m-%Y') like ?", ["%$keyword%"]);

@@ -90,7 +90,7 @@ class Telegram implements ShouldQueue {
     public function updateClientsSignal(ClientRepository $clientRepository, ClientSignalRepository $clientSignalRepository) {
         $filterData = ['user_id' => $this->user->id];
         if ($this->client) {
-            $filterData = ['user_id' => $this->user->id, 'client_id' => $this->client->id];
+            $filterData = ['user_id' => $this->user->id, 'id' => $this->client->id];
         }
         $clients = $clientRepository->findAllByAttributes($filterData);
         $this->setOutput(['title' => 'Clients Signals']);

@@ -18,7 +18,7 @@ class CreateClientSignalsTable extends Migration
             $table->bigInteger('client_id')->unsigned();
             $table->timestamp('date')->nullable();
             $table->decimal('value');
-            $table->string('comment');
+            $table->string('comment')->nullable();
             $table->timestamps();
             $table->foreign('client_id')->references('id')->on('clients');
         });

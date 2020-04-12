@@ -29,6 +29,13 @@ class ClientSignalDataTable extends DataTable
             ->filterColumn('date', function ($query, $keyword) {
                 $query->whereRaw("DATE_FORMAT(date,'%d-%m-%Y') like ?", ["%$keyword%"]);
             })
+            ->filterColumn('value', function ($query, $keyword) {
+                if ($keyword == '-') {
+                    $query->whereRaw("value > ? and value != ? or value < ?", [-7, 0, -28]);
+                } else {
+                    $query->whereRaw("value like ?", ["%$keyword%"]);
+                }
+            })
             ->rawColumns(['client_id', 'action']);
     }
 
