@@ -36,6 +36,11 @@ class ClientSignalDataTable extends DataTable
                     $query->whereRaw("value like ?", ["%$keyword%"]);
                 }
             })
+            ->filterColumn('client_id', function ($query, $keyword) {
+                $query->whereHas('client', function($q) use($keyword){
+                    $q->where('login', $keyword);
+                });
+            })
             ->rawColumns(['client_id', 'action']);
     }
 
