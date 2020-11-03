@@ -157,6 +157,9 @@ class Abills implements ShouldQueue {
                     } else {
                         $data['status'] = 0;
                     }
+                } elseif (is_null($clientSessions)) {
+                    Log::warning('json Abills:', ['$clientSessions'=> null]);
+                    $data['status'] = 2;
                 } else {
                     Log::warning('json Abills:', $clientSessions);
                     $data['status'] = 2;
